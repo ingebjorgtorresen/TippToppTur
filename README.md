@@ -1,7 +1,7 @@
 # Tur-applikasjon
 #1 Klon prosjektet i din valgfrie IDE
-Anbefaler Pycharm proffesional - Dette får en gratis gjennom ntnu. Denne funker også veldig bra for parprogrammering.
-Velig brukervennlig.
+Anbefaler Pycharm professional - Dette får en gratis gjennom ntnu. Denne funker også veldig bra for parprogrammering.
+Velig brukervennlig. https://www.jetbrains.com/pycharm/ 
 
 
 #2 Installer pip - https://pypi.org/project/pip/
