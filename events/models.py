@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import *
+from brukere.models import Turgåere
 
 
 # Create your models here.
@@ -9,7 +10,7 @@ class Event(models.Model):
         max_length=255,
         blank=False,
     )
-    arrangør = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, default=None)
+    arrangør = models.ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False, default=None)
     dato = models.DateField()
     beskrivelse = models.TextField(blank=False, default='')
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
