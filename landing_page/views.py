@@ -6,8 +6,5 @@ from django.http import HttpResponse
 def home(request):
     return render(request, 'landing_page/home.html')
 
-def trips(request):
-    return render(request, 'landing_page/trips.html')
-
 def myPage(request):
     return render(request, 'landing_page/myPage.html')
