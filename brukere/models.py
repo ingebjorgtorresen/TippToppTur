@@ -22,8 +22,9 @@ experience = (
 
 
 class Turgåere(AbstractUser):
+    ##PROFILBILDE funker kanskje ikke helt enda :)
     profilbilde = models.ImageField(upload_to='static/uploads/profilbilder/',
-                                    default='static/uploads/profilbilder/placeholder.jpg')
+                                    default='placeholder.jpg')
     by = models.CharField(choices=citychoices,
                           max_length=20, blank=False, default=" ")
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
