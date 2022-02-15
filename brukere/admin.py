@@ -7,8 +7,10 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': (
-            'city',
-            'test'
+            'profilbilde',
+            'by',
+            'telefonnummer',
+            'ferdighetsnivå'
         )}),
     )
 
