@@ -8,5 +8,7 @@ def trips(request):
 def tripstest(request):
     event = Event.objects.all()
     context = {'tittel': event,
+    'arranør' : event,
+    'dato' : event,
     'beskrivelse': event}
     return render(request, 'landing_page/trips.html', context)
