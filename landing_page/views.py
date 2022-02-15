@@ -8,6 +8,3 @@ def home(request):
 
 def trips(request):
     return render(request, 'landing_page/trips.html')
-
-def myPage(request):
-    return render(request, 'landing_page/myPage.html')
