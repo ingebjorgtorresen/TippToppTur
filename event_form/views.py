@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def event_form(request):
     return render(request, 'event_form.html')
+
+def new_event(request):
+    return HttpResponse(request)
