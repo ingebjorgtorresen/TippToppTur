@@ -7,10 +7,6 @@ form > div > label{
     display: block;
 }
 
-input, textarea{
-    margin-bottom: 12pt;
-}
-
 input + span{
     display: inline-block;
 }
