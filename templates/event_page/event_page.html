@@ -2,10 +2,14 @@
 <html>
     <head></head>
     <body>
-        <h1>Tittel: {{ title }}</h1>
-        <p>Dato: {{ date }}</p>
-        <p>Arrangør: {{ arrangør }}</p>
-        <p>Destinasjon: {{ destination }}</p>
-        <p>Beskrivelse: {{ description }}</p>
+        {% if exists %}
+            <h1>Tittel: {{ title }}</h1>
+            <p>Dato: {{ date }}</p>
+            <p>Arrangør: {{ arrangør }}</p>
+            <p>Destinasjon: {{ destination }}</p>
+            <p>Beskrivelse: {{ description }}</p>
+        {% else %}
+            <h1>Arrangementet finnes ikke</h1>
+        {% endif %}
     </body>
 </html>
