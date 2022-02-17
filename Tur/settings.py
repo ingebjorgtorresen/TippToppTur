@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events.apps.EventsConfig',
     'brukere.apps.BrukereConfig',
+    'login_page'
 ]
 
 MIDDLEWARE = [
