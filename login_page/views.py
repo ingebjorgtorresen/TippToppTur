@@ -5,7 +5,8 @@ from .forms import CustomUserCreationForm
 from django.urls import reverse
 from django.contrib import messages
 
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your views here.
 
 def login_page(request):
@@ -15,13 +16,13 @@ def login_page(request):
 def register(request):
     if request.method == "GET":
         return render(
-            request, template_name="login_page/newuser.html",context=
+            request, template_name='login_page/newuser.html',context=
             {"form": CustomUserCreationForm}
         )
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            User = form.save()
+            login(request, User)
             messages.success(request, "Registration successful.")
-            return redirect(reverse("dashboard"))
+            return redirect(reverse("minside"))

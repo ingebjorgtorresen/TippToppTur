@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ny bruker</title>
+</head>
+<body>
+{% block content %}
+
+
+    <!--Register-->
+    <div class="container py-5">
+        <h1>Register</h1>
+        <form action="/register/">
+            <label for="brukernavn">brukernavn: </label>
+            <input id="brukernavn" type="text" name="brukernavn" value="{{ brukernavn }}">
+            <br>
+            <label for="fornavn">fornavn: </label>
+            <input id="fornavn" type="text" name="fornavn" value="{{ fornavn }}">
+            <br>
+            <label for="etternavn">etternavn: </label>
+            <input id="etternavn" type="text" name="etternavn" value="{{ etternavn }}">
+            <br>
+            <label for="passord">Passord: </label>
+            <input id="passord" type="text" name ="passord" value="{{ passord }}">
+            <br>
+            
+
+            <label for="email">epost: </label>
+            <input id="email" type="text" name="email" value="{{ email }}">
+            <br>
+            <label for="telefonnr">telefonnummer: </label>
+            <input id="telefonnr" type="text" name="telefonnr" value="{{ telefonnr }}">
+            <br>
+            <label for="by">Velg din by: </label>
+            <select id="by" name="by">
+                <option value="trondheim">Trondheim</option>
+                <option value="bergen">Bergen</option>
+                <option value="oslo">Oslo</option>
+                <option value="tromsø">Tromsø</option>
+            </select>
+            <br>
+            <label for="ferdighetsnivå">Velg ditt ferdighetsnivå: </label>
+            <select name="ferdighetsnivå" id="ferdighetsnivå">
+                <option value="nybegynner">Nybegynner</option>
+                <option value="erfaren">Erfaren</option>
+                <option value="ekspert">Ekspert</option>
+            </select>
+
+        </form>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">Registrer</button>
+        </form>
+        <p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+    </div>
+
+{% endblock %}
+</body>
+</html>
+{% comment %}
+<form action="/your-name/" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form>
+{% endcomment %}
