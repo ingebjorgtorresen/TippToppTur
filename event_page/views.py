@@ -3,7 +3,7 @@ from events.models import Event
 
 # Create your views here.
 
-def event_page(request, id):
+def event_page(request):
     id = request.GET.get('id', '0')
     try:
         event = Event.objects.get(pk=id)
