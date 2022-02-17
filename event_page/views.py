@@ -9,6 +9,7 @@ def event_page(request):
         context = {
             'title': event.tittel,
             'date': event.dato,
+            'arrangør': event.arrangør,
             'destination': "Kommer senere",
             'description': event.beskrivelse,
         }
