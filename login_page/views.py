@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def login_page(request):
@@ -18,3 +18,7 @@ def login_b(request):
 
 def register(request):
     return HttpResponse("Hello")
+
+def logout_b(request):
+    logout(request)
+    return redirect("home")
