@@ -6,7 +6,7 @@ from events.models import Event
 def event_page(request):
     id = request.GET.get('id', '0')
     try:
-        event = Event.objects.get(pk=1)
+        event = Event.objects.get(pk=id)
         context = {
             'exists': True,
             'title': event.tittel,
