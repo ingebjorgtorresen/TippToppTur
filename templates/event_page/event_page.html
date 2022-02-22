@@ -9,16 +9,19 @@
         </div>
         <div class="row col-8 offset-2">
             {% if exists %}
+            <div class="container">
+
                 <h1> {{ title }}</h1>
                 <i> <p> <font size="-1"> {{ date }} </font> </p>
-                <p> <font size="-1"> Arrangør: {{ arrangør }} </font> </p>
-                <p> <font size="-1"> Destinasjon: {{ destination }} </font> </p>
-                 </i>
+                    <p> <font size="-1"> Arrangør: {{ arrangør }} </font> </p>
+                    <p> <font size="-1"> Destinasjon: {{ destination }} </font> </p>
+                </i>
                 <br>
-                <p> {{ description }}</p>
-            {% else %}
+                <p> {{ description }}</p>¨
+                {% else %}
                 <h1>Arrangementet finnes ikke</h1>
-            {% endif %}
+                {% endif %}
+            </div>
         <div>
     </body>
 </html>
