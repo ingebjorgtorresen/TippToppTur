@@ -31,4 +31,6 @@ class Turgåere(AbstractUser):
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
 
     def __str__(self):
-        return '{}'.format(self.username)
+         return '{}'.format(self.username)
+    # def __str__(self) -> str:
+    #     return f'{self.by}, {self.telefonnummer}, {self.ferdighetsnivå}'
