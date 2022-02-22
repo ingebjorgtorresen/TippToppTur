@@ -12,7 +12,7 @@
     <body>
         <div class="container">
         <h1>Opprett turarrangement</h1>
-        <form id="eventform" action="{% url "new_event" %}" method="post">
+        <form id="eventform" action="{% url 'new_event' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="title">Tittel:</label>
