@@ -16,16 +16,20 @@
       </li>
     </ul>
     {% if user %}
+    <form action="/logout">
+      <button type="submit">Logout</button>
+    </form>
     <p>{{ name }}</p>
     <a class="navbar-brand" href="{% url 'home' %}">
       {% load static %}
       <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
     </a>
     {% else %}
-    <a class="navbar-brand" href="{% url 'login_page' %}">
-      {% load static %}
-      <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
-    </a>
+    {% if view %}
+    <form action="/login">
+      <button type="submit">Login</button>
+    </form>
+    {% endif %}
     {% endif %}
   </div>
 </nav>

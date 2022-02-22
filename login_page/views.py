@@ -4,7 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def login_page(request):
-    return render(request, 'login_page/login_page.html')
+    user = request.user
+    user_auth = user.is_authenticated
+    context = {'user': user_auth, "name": user.username, "view": False}
+    return render(request, 'login_page/login_page.html', context)
 
 def login_b(request):
     username = request.POST['username']
