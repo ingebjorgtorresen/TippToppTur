@@ -1,4 +1,5 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
+from django.forms import PasswordInput
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import CustomUserCreationForm
@@ -6,6 +7,8 @@ from django.urls import reverse
 from django.contrib import messages
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from brukere.models import Turgåere
 User = get_user_model()
 # Create your views here.
 
@@ -14,15 +17,30 @@ def login_page(request):
 
 
 def register(request):
-    if request.method == "GET":
-        return render(
-            request, template_name='login_page/newuser.html',context=
-            {"form": CustomUserCreationForm}
-        )
-    elif request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            User = form.save()
-            login(request, User)
-            messages.success(request, "Registration successful.")
-            return redirect(reverse("minside"))
+    return render(request, "login_page/newuser2.html")
+
+def register_user(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    password2 = request.POST["password2"]
+    noe = Turgåere.objects.filter(username=username)
+    if (noe):
+        return redirect("register")
+    
+    if (password != password2):
+        return redirect("register")
+    
+    user = Turgåere(username=username, password=make_password(password))
+    user.save()
+
+    #new_user = Turgåere.objects.get_or_create(username=username,is_staff = False)
+    #new_user.set_password(password)
+    #new_user.save()
+    
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect("home")
+    else:
+        return redirect("register")
+    
