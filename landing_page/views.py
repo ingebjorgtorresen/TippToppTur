@@ -1,6 +1,7 @@
 import django
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
@@ -12,5 +13,5 @@ def home(request):
 def trips(request):
     user = request.user
     user_auth = user.is_authenticated
-    context = {'user': user_auth, "name": user.username, "view": True}
+    context = {'user': user_auth, "name": user.username}
     return render(request, 'landing_page/trips.html', context)
