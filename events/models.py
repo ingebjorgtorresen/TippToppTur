@@ -15,6 +15,7 @@ class Event(models.Model):
     beskrivelse = models.TextField(blank=False, default='')
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
+    turgåere = []
 
     def __str__(self):
         return '{}, Dato: {}'.format(self.tittel, self.dato)

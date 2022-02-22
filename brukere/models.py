@@ -29,6 +29,7 @@ class Turgåere(AbstractUser):
                           max_length=20, blank=False, default=" ")
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
+    turer = []
 
     def __str__(self):
         return '{}'.format(self.username)
