@@ -10,17 +10,27 @@
         <form id="eventform" action="{% url 'register_user' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="username">Tittel:</label>
+                <label for="username">Brukernavn (innlogging):</label>
                 <input type="text" class="form-control" id="username" name="username" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="password">Destinasjon:</label>
+                <label for="username">E-mail:</label>
+                <input type="text" class="form-control" id="mail" name="mail" required>
+                <span></span>
+            </div>
+            <div class="form-group">
+                <label for="username">Fullt navn:</label>
+                <input type="text" class="form-control" id="navn" name="navn" required>
+                <span></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Passord:</label>
                 <input type="text" id="password" class="form-control" name="password" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="password2">Destinasjon:</label>
+                <label for="password2">Gjenta passord:</label>
                 <input type="text" id="password2" class="form-control" name="password2" required>
                 <span></span>
             </div>

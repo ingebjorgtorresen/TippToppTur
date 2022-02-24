@@ -41,5 +41,5 @@ class CustomUserCreationForm(UserCreationForm):
         User.profilbilde = self.cleaned_data['profilbilde']
 
         if commit:
-            Turgåere.save()
-        return Turgåere
+            User.save()
+        return User
