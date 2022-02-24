@@ -1,22 +1,16 @@
-from codecs import register_error
-import email
-from django.contrib.auth import login, authenticate
-from django.forms import PasswordInput
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import CustomUserCreationForm
 from django.urls import reverse
 from django.contrib import messages
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from brukere.models import Turgåere
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+# Create your views here.
 User = get_user_model()
 # Create your views here.
-
-def login_page(request):
-    return HttpResponse("Dette kommer på siden")
-
 
 def register(request):
     error = request.session.pop("error", None)
@@ -120,4 +114,23 @@ def register_user(request):
     else:
         request.session["error"] = "Feil i databasen, kontakt systemansvarlig!!"
         return redirect("register")
-    
+
+def login_page(request):
+    user = request.user
+    user_auth = user.is_authenticated
+    context = {'user': user_auth, "name": user.username, "view": False}
+    return render(request, 'login_page/login_page.html', context)
+
+def login_b(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect("trips")
+    else:
+        return redirect("login_page")
+
+def logout_b(request):
+    logout(request)
+    return redirect("home")
