@@ -32,14 +32,20 @@ class Turgåere(AbstractUser):
 
     ##Metoden tar inn et event objekt som argument
     def register(self, event):
-        registration = User_registration(user_pk=self, event_pk=event)
-        registration.save()
-        return None
+        if not self.isRegistered(event):
+            registration = User_registration(user_pk=self, event_pk=event)
+            registration.save()
+        else:
+            return False
+        return True
 
     def unRegister(self, event):
-        registration = User_registration.objects.filter(user_pk=self, event_pk=event)
-        registration.delete()
-        return None
+        if self.isRegistered(event):
+            registration = User_registration.objects.filter(user_pk=self, event_pk=event)
+            registration.delete()
+        else:
+            return False
+        return True
     
     def isRegistered(self, event):
         registration = User_registration.objects.filter(user_pk=self, event_pk=event)
