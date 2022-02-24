@@ -26,13 +26,29 @@ def register_user(request):
     navn = request.POST['navn']
     epost = request.POST['mail']
 
+    if len(username) > 3:
+        request.session["error"]  =  "Brukernavnet ditt må være lenger enn 3 bokstaver."
+        return redirect("register")
+   
+
+    for a in username:
+        if "!@#$%^&*()+?=,<>/".__contains__(a):
+            request.session["error"] = "Brukernavnet ditt kan ikke inneholde disse symboler."
+            return redirect("register")
+
+    if " " in username:
+        request.session["error"] = "Brukernavnet ditt kan ikke inneholde disse symboler."
+        return redirect("register")
+
     noe = Turgåere.objects.filter(username=username)
     if (noe):
         return redirect("register")
     
     if (password != password2):
         return redirect("register")
-    
+
+
+
     user = Turgåere(username=username, password=make_password(password))
     user.save()
 
