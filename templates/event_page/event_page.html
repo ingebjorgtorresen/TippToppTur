@@ -19,13 +19,13 @@
         <br>
         <p> {{ description }}</p>
         {% if True%}
-        <button class="btn btn-success" type="button">
+        <a class="btn btn-success" type="button" href="../event_page/register_events?id={{id}}">
             Meld på tur
-        </button>
+        </a>
         {% else %}
-            <button class="btn btn-danger" type="button">
+            <a class="btn btn-danger" type="button" href="../event_page/register_events">
             Meld av tur
-        </button>
+            </a>
             {% endif %}
     {% else %}
         <h1>Arrangementet finnes ikke</h1>

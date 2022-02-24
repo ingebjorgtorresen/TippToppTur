@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from events.models import Event
 
@@ -14,6 +15,7 @@ def event_page(request):
             'arrangør': event.arrangør,
             'destination': "Kommer senere",
             'description': event.beskrivelse,
+            'id': id,
         }
     except Event.DoesNotExist:
         context = {
@@ -21,3 +23,8 @@ def event_page(request):
         }
         return render(request, 'event_page/event_page.html', context)
     return render(request, 'event_page/event_page.html', context)
+
+def register_events(request):
+    eventpk = request.GET.get('id', '0')
+    userpk = request.user.pk
+    return HttpResponse("HIE")
