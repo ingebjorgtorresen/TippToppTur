@@ -31,21 +31,18 @@ class Turgåere(AbstractUser):
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
 
     ##Metoden tar inn et event objekt som argument
-    @classmethod
-    def register(cls, event):
-        registration = User_registration(user_pk=cls.pk, event_pk=event.pk)
+    def register(self, event):
+        registration = User_registration(user_pk=self, event_pk=event)
         registration.save()
         return None
 
-    @classmethod
-    def unRegister(cls, event):
-        registration = User_registration.objects.filter(user_pk=cls.pk, event_pk=event.pk)
+    def unRegister(self, event):
+        registration = User_registration.objects.filter(user_pk=self, event_pk=event)
         registration.delete()
         return None
     
-    @classmethod
-    def isRegistered(cls, event):
-        registration = User_registration.objects.filter(user_pk=cls.pk, event_pk=event.pk)
+    def isRegistered(self, event):
+        registration = User_registration.objects.filter(user_pk=self, event_pk=event)
         return registration.exists()
 
     def __str__(self):
