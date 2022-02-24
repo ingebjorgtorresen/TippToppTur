@@ -10,10 +10,11 @@ class Event(models.Model):
         max_length=255,
         blank=False,
     )
-    arrangør = models.ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False, default=None)
+    arrangør = models.CharField(max_length=40,default='')
+        #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateField()
     beskrivelse = models.TextField(blank=False, default='')
-    bilde = models.ImageField(upload_to='static/uploads/', blank=True)
+    #bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
 
     def __str__(self):
