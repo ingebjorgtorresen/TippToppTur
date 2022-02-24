@@ -23,6 +23,9 @@ def register_user(request):
     username = request.POST["username"]
     password = request.POST["password"]
     password2 = request.POST["password2"]
+    navn = request.POST['navn']
+    epost = request.POST['mail']
+
     noe = Turgåere.objects.filter(username=username)
     if (noe):
         return redirect("register")
