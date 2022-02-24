@@ -1,4 +1,5 @@
 from codecs import register_error
+import email
 from django.contrib.auth import login, authenticate
 from django.forms import PasswordInput
 from django.shortcuts import render, redirect
@@ -31,18 +32,18 @@ def register_user(request):
     name = request.POST['navn']
     epost = request.POST['mail']
 
-    if len(username) > 3:
+    # Test username
+    if len(username) < 3:
         request.session["error"]  =  "Brukernavnet ditt må være lenger enn 3 bokstaver."
         return redirect("register")
    
-
     for a in username:
         if "!@#$%^&*()+?=,<>/".__contains__(a):
-            request.session["error"] = "Brukernavnet ditt kan ikke inneholde disse symboler."
+            request.session["error"] = "Brukernavnet ditt kan ikke inneholde symboler."
             return redirect("register")
 
     if " " in username:
-        request.session["error"] = "Brukernavnet ditt kan ikke inneholde disse symboler."
+        request.session["error"] = "Brukernavnet ditt kan ikke inneholde space."
         return redirect("register")
 
     noe = Turgåere.objects.filter(username=username)
@@ -104,9 +105,12 @@ def register_user(request):
         request.session["error"] = "Passordene må matche!!"
         return redirect("register")
 
+    last_name = names[1]
+    if len(names) >= 3:
+        for x in names[2:]:
+            last_name += (" " + x)
 
-
-    user = Turgåere(username=username, password=make_password(password))
+    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0], last_name=last_name)
     user.save()
     
     user = authenticate(request, username=username, password=password)
