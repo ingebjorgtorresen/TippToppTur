@@ -10,7 +10,7 @@ class Event(models.Model):
         max_length=255,
         blank=False,
     )
-    arrangør = models.CharField(max_length=20,default='')
+    arrangør = models.CharField(max_length=40,default='')
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateField()
     beskrivelse = models.TextField(blank=False, default='')
