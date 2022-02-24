@@ -1,3 +1,4 @@
+{% include 'base.html' %}
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -5,6 +6,7 @@
     </head>
     
     <body>
+    {% if not request.user.is_authenticated %}
         <div class="container">
         <h1>Opprett user</h1>
         <form id="eventform" action="{% url 'register_user' %}" method="post">
@@ -41,5 +43,7 @@
         </form>
         <p>{{ error }}</p>
         </div>
+    {% endif %}
+
     </body>
 </html>

@@ -24,9 +24,9 @@
             {% endif %}
         </ul>
 
-        {% if user %}
+        {% if request.user.is_authenticated %}
             <ul class="navbar-nav m-lg-0">
-                <p class="navbar">{{ name }}</p>
+                <p class="navbar">{{ request.user.username }}</p>
                 <a class="navbar-link" href="{% url 'home' %}">
                     {% load static %}
                     <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
@@ -44,7 +44,7 @@
                 </li>
             </ul>
         {% else %}
-            {% if view %}
+            {% if not request.user.is_authenticated %}
                 <form action="/login">
                     <button type="submit">Login</button>
                 </form>
