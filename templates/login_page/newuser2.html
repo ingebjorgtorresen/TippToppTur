@@ -8,11 +8,11 @@
     <body>
     {% if not request.user.is_authenticated %}
         <div class="container">
-        <h1>Opprett user</h1>
+        <h1>Opprett bruker</h1>
         <form id="eventform" action="{% url 'register_user' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="username">Brukernavn (innlogging):</label>
+                <label for="username">Brukernavn:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
                 <span></span>
             </div>
