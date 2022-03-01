@@ -26,27 +26,27 @@
 
         {% if request.user.is_authenticated %}
             <ul class="navbar-nav m-lg-0">
-                <p class="navbar">{{ request.user.username }}</p>
-                <a class="navbar-link" href="{% url 'home' %}">
-                    {% load static %}
-                    <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
-                </a>
                 <li class="nav-item">
-                    <ul class="m-lg-0">
+                        <a class="navbar-link badge badge-light" href="{% url 'home' %}">
+                            {{ request.user.username }}
+                            {% load static %}
+                            <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
+                        </a>
+                </li>
+                <li class="nav-item">
                         <form action="/logout">
                             <a class="nav-link">
-                                <button class="nav-link">
+                                <button class="btn btn-secondary">
                                     Logg ut
                                 </button>
                             </a>
                         </form>
-                    </ul>
                 </li>
             </ul>
         {% else %}
-            {% if view %}
+            {% if not request.user.is_authenticated %}
                 <form action="/login">
-                    <button type="submit">Login</button>
+                    <button type="submit" class="btn btn-success">Logg inn</button>
                 </form>
             {% endif %}
         {% endif %}
