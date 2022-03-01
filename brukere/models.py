@@ -57,3 +57,6 @@ class Turgåere(AbstractUser):
 class User_registration(models.Model):
     user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
     event_pk = models.ForeignKey('events.Event', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}, {}'.format(self.user_pk, self.event_pk.pk)

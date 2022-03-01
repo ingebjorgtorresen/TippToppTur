@@ -13,6 +13,7 @@ def tripstest(request):
     'arrangør' : event,
     'dato' : event,
     'beskrivelse': event,
+    'bilde' : event,
     'user': user.is_authenticated,
     'name': user.username,
     'view': True}
