@@ -2,26 +2,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!DOCTYPE html>
 <html>
-    <head></head>
-    <body>
-        <div class="row col-6 offset-1">
-            <button type="button" class="btn btn-outline-success btn-sm">Gå tilbake</button>
-        </div>
-        <div class="row col-8 offset-2">
-            {% if exists %}
-            <div class="container">
+<head></head>
+<body>
+<div class="row col-6 offset-1 ">
+    <a href="../turer">
+        <input type="button" value="Gå tilbake" class="btn btn-outline-success btn-sm" />
+    </a>
+</div>
+<div class="row col-8 offset-2 bg-light">
+    {% if exists %}
+        <div class="container">
 
-                <h1> {{ title }}</h1>
-                <i> <p> <font size="-1"> {{ date }} </font> </p>
-                    <p> <font size="-1"> Arrangør: {{ arrangør }} </font> </p>
-                    <p> <font size="-1"> Destinasjon: {{ destination }} </font> </p>
-                </i>
-                <br>
-                <p> {{ description }}</p>
-                {% else %}
-                <h1>Arrangementet finnes ikke</h1>
-                {% endif %}
-            </div>
-        <div>
-    </body>
+        <h1> {{ title }}</h1>
+        <i><p><font size="-1"> Dato: {{ date }} </font></p>
+            <p><font size="-1"> Arrangør: {{ arrangør }} </font></p>
+            <p><font size="-1"> Destinasjon: {{ destination }} </font></p>
+        </i>
+        <br>
+        <p> {{ description }}</p>
+        {% if request.user.is_authenticated %}
+        {% if not påmeldt %}
+        <a class="btn btn-success" type="button" href= '../event_page/register_events?id={{id}}'>
+            Meld på tur
+        </a>
+        {% else %}
+            <a class="btn btn-danger" type="button" href="../event_page/register_events?id={{id}}">
+            Meld av tur
+            </a>
+            {% endif %}
+            {% endif %}
+    {% else %}
+        <h1>Arrangementet finnes ikke</h1>
+    {% endif %}
+    </div>
+    <div>
+</body>
 </html>

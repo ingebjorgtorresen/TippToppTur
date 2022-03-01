@@ -24,4 +24,5 @@ urlpatterns = [
     path('event_form/', include('event_form.urls')),
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
+    path('event_page/', include('event_page.urls')),
 ]
