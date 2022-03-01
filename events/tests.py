@@ -1,7 +1,6 @@
 import datetime
-
 from django.test import TestCase
-
+from .models import Event
 from events import models
 from events.models import Event
 from brukere.models import Turgåere
@@ -48,3 +47,12 @@ class EventModelTest(TestCase):
         event = Event.objects.get(id=1)
         description = "en fin tur med gutta"
         self.assertEqual(event.beskrivelse, description)
+
+# Create your tests here.
+class test_event(TestCase):
+    def test_make_event(self):
+        time = datetime.datetime.now()
+        event = Event(tittel="Tur", dato=time, beskrivelse="Hello")
+        self.assertEqual(event.tittel, "Tur")
+        self.assertEqual(event.dato, time)
+        self.assertEqual(event.beskrivelse,"Hello")

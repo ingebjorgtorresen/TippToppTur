@@ -30,7 +30,33 @@ class Turgåere(AbstractUser):
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
 
+    ##Metoden tar inn et event objekt som argument
+    def register(self, event):
+        if not self.isRegistered(event):
+            registration = User_registration(user_pk=self, event_pk=event)
+            registration.save()
+        else:
+            return False
+        return True
+
+    def unRegister(self, event):
+        if self.isRegistered(event):
+            registration = User_registration.objects.filter(user_pk=self, event_pk=event)
+            registration.delete()
+        else:
+            return False
+        return True
+    
+    def isRegistered(self, event):
+        registration = User_registration.objects.filter(user_pk=self, event_pk=event)
+        return registration.exists()
+
     def __str__(self):
-         return '{}'.format(self.username)
-    # def __str__(self) -> str:
-    #     return f'{self.by}, {self.telefonnummer}, {self.ferdighetsnivå}'
+        return '{}'.format(self.username)
+
+class User_registration(models.Model):
+    user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
+    event_pk = models.ForeignKey('events.Event', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}, {}'.format(self.user_pk, self.event_pk.pk)

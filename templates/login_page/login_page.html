@@ -8,21 +8,31 @@
 <div class="container">
   <div class="row col-8 offset-2">
     <h1>Innlogging</h1>
-  <form class="container">
+  <form class="container" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+      {% if not request.user.is_authenticated %}
       <div class="form-group">
         <label for="exampleInputEmail1">Brukernavn</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Skriv inn brukernavn">
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Skriv inn brukernavn" name="username">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Passord</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Skriv inn passord">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Skriv inn passord" name="password">
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-success login">Logg inn</button>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-secondary login">Registrer deg</button>
-      </div>
+
   </form>
-  </div>
+  <form id="register_url" class = "container" action="{% url 'register' %}">
+    <div class="form-group">
+      <button formid="register_url" class="btn btn-secondary login">Registrer deg</button>
+    </div>
+      {% else %}
+          <div class="alert alert-success" role="alert">
+              Du er allerede logget inn
+          </div>
+      {% endif %}
+  </form>
+</div>
 </div>
