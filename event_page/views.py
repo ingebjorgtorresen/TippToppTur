@@ -15,7 +15,7 @@ def event_page(request):
             'arrangør': event.arrangør,
             'destination': "Kommer senere",
             'description': event.beskrivelse,
-            'id': id,
+            'id' : id,
         }
     except Event.DoesNotExist:
         context = {
@@ -24,7 +24,9 @@ def event_page(request):
         return render(request, 'event_page/event_page.html', context)
     return render(request, 'event_page/event_page.html', context)
 
-def register_events(request):
-    eventpk = request.GET.get('id', '0')
-    userpk = request.user.pk
-    return HttpResponse("HIE")
+def register_event(request):
+    id = request.GET.get('id', '0')
+    print(id)
+    print("Test")
+
+    #return HttpResponse(id)

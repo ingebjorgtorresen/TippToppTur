@@ -17,9 +17,10 @@
             <p><font size="-1"> Destinasjon: {{ destination }} </font></p>
         </i>
         <br>
+        {{ id }}
         <p> {{ description }}</p>
-        {% if True%}
-        <a class="btn btn-success" type="button" href="../event_page/register_events?id={{id}}">
+        {% if not isRegistered %}
+        <a class="btn btn-success" type="button" href= '../event_page?id={{id}}'>
             Meld på tur
         </a>
         {% else %}
