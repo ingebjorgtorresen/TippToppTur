@@ -24,7 +24,7 @@
             {% endif %}
         </ul>
 
-        {% if user %}
+        {% if request.user.is_authenticated %}
             <ul class="navbar-nav m-lg-0">
                 <li class="nav-item">
                         <a class="navbar-link badge badge-light" href="{% url 'home' %}">
@@ -44,7 +44,7 @@
                 </li>
             </ul>
         {% else %}
-            {% if view %}
+            {% if not request.user.is_authenticated %}
                 <form action="/login">
                     <button type="submit" class="btn btn-success">Logg inn</button>
                 </form>
