@@ -6,7 +6,6 @@ def trips(request):
     return render(request, 'landing_page/trips.html')
 
 def tripstest(request):
-    print("hello")
     user = request.user
     event = Event.objects.all()
     context = {'tittel': event,
