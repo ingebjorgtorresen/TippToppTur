@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from events.models import Event
+from brukere.models import Turgåere, User_registration
 
 # Create your views here.
 
@@ -16,6 +17,7 @@ def event_page(request):
             'destination': "Kommer senere",
             'description': event.beskrivelse,
             'id' : id,
+            'påmeldt': request.user.isRegistered(Event.objects.get(pk=id)),
         }
     except Event.DoesNotExist:
         context = {
@@ -26,7 +28,15 @@ def event_page(request):
 
 def register_event(request):
     id = request.GET.get('id', '0')
-    print(id)
-    print("Test")
-
-    #return HttpResponse(id)
+    event = Event.objects.get(pk=id)
+    if not request.user.isRegistered(event):
+        print("aaaaa")
+        request.user.register(event)
+    else:
+        print("adwad")
+        request.user.unRegister(event)
+    
+    link = "../event_page/?id="
+    link += id
+    return redirect(link)
+        

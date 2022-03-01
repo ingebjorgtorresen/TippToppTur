@@ -19,12 +19,12 @@
         <br>
         {{ id }}
         <p> {{ description }}</p>
-        {% if not isRegistered %}
-        <a class="btn btn-success" type="button" href= '../event_page?id={{id}}'>
+        {% if not påmeldt %}
+        <a class="btn btn-success" type="button" href= '../event_page/register_events?id={{id}}'>
             Meld på tur
         </a>
         {% else %}
-            <a class="btn btn-danger" type="button" href="../event_page/register_events">
+            <a class="btn btn-danger" type="button" href="../event_page/register_events?id={{id}}">
             Meld av tur
             </a>
             {% endif %}
