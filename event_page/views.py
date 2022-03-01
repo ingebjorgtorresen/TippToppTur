@@ -30,10 +30,8 @@ def register_event(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
     if not request.user.isRegistered(event):
-        print("aaaaa")
         request.user.register(event)
     else:
-        print("adwad")
         request.user.unRegister(event)
     
     link = "../event_page/?id="
