@@ -10,6 +10,7 @@
     <h1>Innlogging</h1>
   <form class="container" action="{% url 'login' %}" method="post">
     {% csrf_token %}
+      {% if not request.user.is_authenticated %}
       <div class="form-group">
         <label for="exampleInputEmail1">Brukernavn</label>
         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Skriv inn brukernavn" name="username">
@@ -21,12 +22,17 @@
       <div class="form-group">
         <button type="submit" class="btn btn-success login">Logg inn</button>
       </div>
-      
+
   </form>
-  </div>
-  <form id="register_url" action="{% url 'register' %}">
+  <form id="register_url" class = "container" action="{% url 'register' %}">
     <div class="form-group">
       <button formid="register_url" class="btn btn-secondary login">Registrer deg</button>
     </div>
+      {% else %}
+          <div class="alert alert-success" role="alert">
+              Du er allerede logget inn
+          </div>
+      {% endif %}
   </form>
+</div>
 </div>
