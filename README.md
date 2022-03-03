@@ -15,4 +15,4 @@ Bruker kommandoen "python3 manage.py runserver" i terminalen. Viktig at denne kj
 
 # Boostrap
 På front-enden bruker vi rammeverket Boostrap. Vi bruker dette til å blant annet lage knapper og navigasjonsfelt, dette er fordi vi føler at vi ikke trenger å finne på hjulet på nytt igjen og derfor bruker vi heller ferdiglagde komponenter. 
-Vi bruker Boostrap versjon 4.6 og dokummentasjonen kan finnes [her] (https://getbootstrap.com/docs/4.6/).
+Vi bruker Boostrap versjon 4.6 og dokummentasjonen kan finnes [her](https://getbootstrap.com/docs/4.6/).
