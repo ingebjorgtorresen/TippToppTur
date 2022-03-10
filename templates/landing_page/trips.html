@@ -1,0 +1,24 @@
+{% include 'base.html' %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% block content %}
+
+{% for tittel in tittel %}
+
+<div class="card-deck">
+<div class="card mx-auto" style="width: 18rem;">
+    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+    <div class="card-body">
+      <h4 class="card-title">{{tittel.tittel}}</h4>
+
+        <p class="card-text"style="font-size:14px"> Arrangør: {{tittel.arrangør}}</p>
+        <p class="card-text"style="font-size:14px"> Dato: {{tittel.dato}}</p>
+
+      <p class="card-text"><I>{{tittel.beskrivelse}}</I></p>
+      <a href="../event_page?id={{tittel.pk}}" class="btn btn-success">Se detaljer</a>
+    </div>
+  </div>
+</div>
+  {% endfor %}
+
+  {% endblock %}
