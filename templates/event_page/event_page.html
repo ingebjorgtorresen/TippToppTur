@@ -45,7 +45,11 @@
 
     {% else %}
         <h1>Arrangementet finnes ikke</h1>
-    {% endif %}
+
+        {% endif %}
+        {% if not request.user.is_authenticated %}
+        <p><em>Du må være pålogget for å melde deg på et arrangement!</em></p>
+        {% endif %}
     </div>
     <div>
 </body>
