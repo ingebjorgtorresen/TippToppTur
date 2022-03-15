@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Event
 
 # Create your views here.
@@ -17,3 +17,9 @@ def tripstest(request):
     'name': user.username,
     'view': True}
     return render(request, 'landing_page/trips.html', context)
+
+def deleteEvent(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    event.deleteEvent()
+    return redirect("trips")

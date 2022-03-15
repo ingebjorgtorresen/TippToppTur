@@ -27,6 +27,11 @@ class Event(models.Model):
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
 
+    def deleteEvent(self):
+        event = Event.objects.filter(pk = self.pk)
+        event.delete()
+        return True
+
     def __str__(self):
         return '{}, Dato: {}'.format(self.tittel, self.dato)
 
