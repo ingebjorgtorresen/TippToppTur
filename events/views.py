@@ -32,7 +32,6 @@ def editEvent(request):
     'dato' : str(event.dato),
     'beskrivelse': event.beskrivelse,
     'pk': event.pk}
-    print(context)
     return render(request, 'edit_event/edit_event_form.html', context)
 
 def updateEvent(request):
