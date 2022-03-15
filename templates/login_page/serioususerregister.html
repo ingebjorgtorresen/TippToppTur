@@ -7,25 +7,25 @@
     
     <body>
     {% if not request.user.is_authenticated %}
-         <a class="nav-link" href="{% url 'register_serious' %}">
+        <a class="nav-link" href="{% url 'register' %}">
             Registrer
         </a>
         <div class="container">
-        <h1>Opprett bruker</h1>
-        <form id="eventform" action="{% url 'register_user' %}" method="post">
+        <h1>Opprett seriøs bruker</h1>
+        <form id="eventform" action="{% url 'register_serious_user' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="username">Brukernavn:</label>
+                <label for="username">Innloggingsnavn:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="username">E-mail:</label>
+                <label for="username">Bedrifts-mail:</label>
                 <input type="email" class="form-control" id="mail" name="mail" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="username">Fullt navn:</label>
+                <label for="username">Bedriftens navn:</label>
                 <input type="text" class="form-control" id="navn" name="navn" required>
                 <span></span>
             </div>
