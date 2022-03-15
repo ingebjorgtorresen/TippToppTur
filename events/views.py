@@ -30,14 +30,13 @@ def editEvent(request):
     event = Event.objects.get(pk=id)
     context = {'tittel': event.tittel,
     'dato' : str(event.dato),
-    'beskrivelse': event.beskrivelse}
+    'beskrivelse': event.beskrivelse,
+    'pk': event.pk}
     print(context)
     return render(request, 'edit_event/edit_event_form.html', context)
 
 def updateEvent(request):
-    #TODO fiks denne metoden
     date = request.POST['date']
-    print(request.POST['id'])
-    e = Event.objects.get(pk=request.POST['id'])
+    e = Event.objects.get(pk=request.POST['primarykey'])
     e.updateEvent(request.POST['title'], date, request.POST['description'])
     return redirect("trips")

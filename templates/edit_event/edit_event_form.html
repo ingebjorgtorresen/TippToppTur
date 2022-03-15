@@ -31,8 +31,8 @@
                 <label for="description">Beskrivelse av turen (valgfri):</label>
                 <textarea rows="10" cols="100" id="description" class="form-control" name="description" form="eventform">{{beskrivelse}}</textarea>
             </div>
-            <div>
-                <input type="hidden" value={{id}}, id="id", name="id" disabled>
+            <div class="form-group">
+                <input type="hidden" value="{{pk}}", id="primaykey", name="primarykey">
             </div>
     
     <button type="submit" class="btn btn-success">
