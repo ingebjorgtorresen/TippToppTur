@@ -1,6 +1,6 @@
+import datetime
 from django.shortcuts import redirect, render
 from .models import Event
-from django.utils.timezone import *
 
 # Create your views here.
 def trips(request):
@@ -29,7 +29,7 @@ def editEvent(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
     context = {'tittel': event.tittel,
-    'dato' : datetime.strftime(event.dato, "%Y-%m-%d"),
+    'dato' : str(event.dato),
     'beskrivelse': event.beskrivelse}
     print(context)
     return render(request, 'edit_event/edit_event_form.html', context)
@@ -40,4 +40,4 @@ def updateEvent(request):
     print(request.POST['id'])
     e = Event.objects.get(pk=request.POST['id'])
     e.updateEvent(request.POST['title'], date, request.POST['description'])
-    return None
+    return redirect("trips")
