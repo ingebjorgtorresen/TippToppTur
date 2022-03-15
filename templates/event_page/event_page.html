@@ -32,7 +32,7 @@
             {% endif %}
             {% if arrangør == request.user.fullName or request.user.is_superuser %}
             <a class="btn btn-danger" role="button" href="../../delete_event?id={{id}}">Slett arrangement</a>
-            <a class="btn btn-success" role="button" href="../../edit_event?id={{id}}">Rediger arrangement</a>
+            <a class="btn btn-secondary" role="button" href="../../edit_event?id={{id}}">Rediger arrangement</a>
             {% endif %}
             {% endif %}
     {% else %}
