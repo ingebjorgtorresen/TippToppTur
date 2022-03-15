@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponse
 from .forms import CustomUserCreationForm
 from django.urls import reverse
@@ -14,9 +16,12 @@ User = get_user_model()
 
 def register(request):
     error = request.session.pop("error", None)
+    datoidag = (datetime.date.today()-datetime.timedelta(weeks=676)).__str__()
     if error is None:
         error = ""
-    context = {'error': error}
+    context = {'error': error,
+               'datoidag' : datoidag,
+               }
     return render(request, "login_page/newuser2.html", context)
 
 def register_user(request):
@@ -25,6 +30,7 @@ def register_user(request):
     password2 = request.POST["password2"]
     name = request.POST['navn']
     epost = request.POST['mail']
+    fødselsdato = request.POST.get('date', False)
 
     # Test username
     if len(username) < 3:
@@ -99,12 +105,16 @@ def register_user(request):
         request.session["error"] = "Passordene må matche!!"
         return redirect("register")
 
-    last_name = names[1]
-    if len(names) >= 3:
-        for x in names[2:]:
-            last_name += (" " + x)
+    if (len(names)<1):
+        request.session["error"] = "Du må skrive fullt navn!!"
+        return redirect('register')
+    else:
+        last_name = names[1]
+        if len(names) >= 3:
+            for x in names[2:]:
+                last_name += (" " + x)
 
-    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0], last_name=last_name)
+    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0], last_name=last_name, fødselsdato=fødselsdato)
     user.save()
     
     user = authenticate(request, username=username, password=password)

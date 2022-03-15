@@ -29,6 +29,7 @@ class Turgåere(AbstractUser):
                           max_length=20, blank=False, default=" ")
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
+    fødselsdato = models.DateField(verbose_name='Fødselsdato', blank=False)
 
     def fullName(self):
         return self.first_name + " " + self.last_name
