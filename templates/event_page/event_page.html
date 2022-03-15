@@ -26,11 +26,23 @@
             Meld på tur
         </a>
         {% else %}
-            <a class="btn btn-danger" role="button" href="../event_page/register_events?id={{id}}">
-            Meld av tur
-            </a>
+            <div class="container">
+                <a class="btn btn-danger" role="button" href="../event_page/register_events?id={{id}}">
+                Meld av tur
+                </a>
+            </div>
+            <div class="container" style="margin-top: 5%;">
+                <h4>Påmeldte:</h4>
+                {% block content %}
+                {% for registrert in registrert %}
+                <p>{{registrert.user_pk}}</p>
+                {% endfor %}
+                {% endblock %}
+            </div>
+                
             {% endif %}
             {% endif %}
+
     {% else %}
         <h1>Arrangementet finnes ikke</h1>
     {% endif %}
