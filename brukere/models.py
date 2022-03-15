@@ -30,6 +30,9 @@ class Turgåere(AbstractUser):
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
 
+    def fullName(self):
+        return self.first_name + " " + self.last_name
+
     ##Metoden tar inn et event objekt som argument
     def register(self, event):
         if not self.isRegistered(event):
