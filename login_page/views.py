@@ -129,6 +129,7 @@ def login_b(request):
         login(request, user)
         return redirect("trips")
     else:
+        messages.error(request, "Feil brukernavn eller passord!")
         return redirect("login_page")
 
 def logout_b(request):
