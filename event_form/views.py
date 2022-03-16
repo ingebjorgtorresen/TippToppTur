@@ -40,15 +40,15 @@ def new_event(request):
     timetoday = timetoday.time()
     # 09:03:34
 
-    if not (datoenher > date_today):
+    if not (datoenher >= date_today):
         request.session["error"] = "Du må velge dato frem i tid!"
         return redirect('event_form')
-
-        # Frem i tid
     if datoenher == date_today:
         if timetoday > timenow:
             request.session["error"] = "Du må velge dato frem i tid!"
             return redirect('event_form')
+        # Frem i tid
+
 
     e = Event(tittel=request.POST['title'],
               dato=datoen1,
