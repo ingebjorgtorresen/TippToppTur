@@ -24,8 +24,9 @@
             </div>
             <div class="form-group">
                 <label for="date">Dato:</label>
-                <input type="date" id="date" class="form-control" name="date" required min={{ datoidag }}>
+                <input type="datetime-local" id="date" class="form-control" name="date" required min={{ datoidag }}>
                 <span></span>
+                <p>{{ error }}</p>
             </div>
             <div class="form-group">
                 <label for="description">Beskrivelse av turen (valgfri):</label>
