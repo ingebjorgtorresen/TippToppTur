@@ -35,6 +35,18 @@ class Turgåere(AbstractUser):
 #Endring
     def fullName(self):
         return self.first_name + " " + self.last_name
+
+    def updateUser(self, fullName, email, date):
+        splitName = fullName.split(' ')
+        user = Turgåere.objects.filter(pk = self.pk)
+        user.update(first_name = splitName[0], last_name = splitName[1], email = email, fødselsdato = date)
+        return True
+
+    def updateSeriousUser(self, fullName, email):
+        splitName = fullName.split(' ')
+        user = Turgåere.objects.filter(pk = self.pk)
+        user.update(first_name = splitName[0], last_name = splitName[1], email = email)
+        return True
         
     ##Metoden tar inn et event objekt som argument
     def register(self, event):
