@@ -1,0 +1,36 @@
+{% include "base.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div class="row col-8 offset-2 bg-light">
+
+    <div class="container">
+        <h1>Min side</h1>
+        {% if request.user.isSeriøsAktør %}
+            <i><p><font size="-1"> Bedriftens navn: {{ request.user.first_name }} {{ request.user.last_name }} </font></p>
+                <p><font size="-1"> Innloggingsnavn: {{ request.user.username }} </font></p>
+                <p><font size="-1"> Epost: {{ request.user.email }} </font></p>
+            </i>
+            <br>
+
+        {% else %}
+            <i><p><font size="-1"> Fornavn: {{ request.user.first_name }} </font></p>
+                <p><font size="-1"> Etternavn: {{ request.user.last_name }} </font></p>
+                <p><font size="-1"> Fødselsdato: {{ request.user.fødselsdato }} </font></p>
+                <p><font size="-1"> Epost: {{ request.user.email }} </font></p>
+            </i>
+            <br>
+        {% endif %}
+        <a class="btn btn-success" role="button" href= '../profil/editprofile'>
+            Rediger informasjon
+        </a>
+        <p></p>
+    </div>
+
+</div>
+
+</body>
+</html>

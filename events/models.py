@@ -16,6 +16,9 @@ def validate_date(dato):
 def validate_date_bool(dato):
     return dato < timezone.now()
 
+
+
+
 class Event(models.Model):
     tittel = models.CharField(
         max_length=255,

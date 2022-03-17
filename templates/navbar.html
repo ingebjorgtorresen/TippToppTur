@@ -27,7 +27,7 @@
         {% if request.user.is_authenticated %}
             <ul class="navbar-nav m-lg-0">
                 <li class="nav-item">
-                        <a class="navbar-link badge badge-light" href="{% url 'home' %}">
+                        <a class="navbar-link badge badge-light" href="{% url 'profil' %}">
                             {{ request.user.username }}
                             {% load static %}
                             <img src="{% static 'images/user.png' %}" width="50" height="50" alt="">
