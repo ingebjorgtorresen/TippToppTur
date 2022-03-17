@@ -10,8 +10,7 @@ class CustomUserAdmin(UserAdmin):
             'profilbilde',
             'by',
             'telefonnummer',
-            'ferdighetsnivå',
-            'seriøsaktør'
+            'ferdighetsnivå'
         )}),
     )
 

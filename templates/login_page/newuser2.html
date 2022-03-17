@@ -8,15 +8,6 @@
     <body>
     {% if not request.user.is_authenticated %}
         <div class="container">
-        <div>
-            &nbsp;
-        </div>
-         <a class="btn btn-outline-success btn-sm" href="{% url 'register_serious' %}">
-            Registrer bedriftsbruker
-        </a>
-            <div>  &nbsp;
-            </div>
-
         <h1>Opprett bruker</h1>
         <form id="eventform" action="{% url 'register_user' %}" method="post">
             {% csrf_token %}

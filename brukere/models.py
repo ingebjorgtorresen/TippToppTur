@@ -29,7 +29,6 @@ class Turgåere(AbstractUser):
                           max_length=20, blank=False, default=" ")
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
-    seriøsaktør = models.BooleanField(default=False)
 
     ##Metoden tar inn et event objekt som argument
     def register(self, event):
@@ -54,9 +53,6 @@ class Turgåere(AbstractUser):
 
     def __str__(self):
         return '{}'.format(self.username)
-
-    def isSeriøsAktør(self):
-        return self.seriøsaktør
 
 class User_registration(models.Model):
     user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
