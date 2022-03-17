@@ -23,10 +23,30 @@
                 <p><font size="-1"> Epost: {{ request.user.email }} </font></p>
             </i>
             <br>
-        {% endif %}
-        <a class="btn btn-success" role="button" href= '../profil/editprofile'>
-            Rediger informasjon
-        </a>
+            <a class="btn btn-success" role="button" href= '../profil/editprofile'>
+                Rediger informasjon
+            </a>
+            <br>
+            <br>
+            <h3>Påmeldte arrangement</h1>
+        {% block content %}
+        {% for userEvent in userEvents %}
+
+        <div class="card-deck">
+            <div class="card mx-auto" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h4 class="card-title">{{userEvent.event_pk.tittel}}</h4>
+                    <p class="card-text"style="font-size:14px">{{userEvent.event_pk.dato}}</p>
+                  <p class="card-text"><I>{{userEvent.event_pk.beskrivelse}}</I></p>
+                  <a href="../event_page?id={{userEvent.event_pk.pk}}" class="btn btn-success">Se detaljer</a>
+                </div>
+              </div>
+            </div>
+  {% endfor %}
+  {% endblock %}
+  {% endif %}
+
         <p></p>
     </div>
 

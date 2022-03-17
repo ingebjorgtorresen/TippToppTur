@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render
+from brukere.models import User_registration
 
 # Create your views here.
 def profil(request):
     user = request.user
     user_auth = user.is_authenticated
-    context = {'user': user_auth, "name": user.username, "view": True}
+    userEvents = User_registration.objects.filter(user_pk = request.user.pk)
+    context = {'user': user_auth, "name": user.username, "userEvents": userEvents, "view": True}
     return render(request, 'profil/profil.html', context)
 
 def editprofile(request):
