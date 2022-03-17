@@ -64,3 +64,11 @@ class test_event(TestCase):
         self.assertEqual(Event.objects.filter(tittel="Test").exists(), True)
         event.deleteEvent()
         self.assertEqual(Event.objects.filter(tittel="Test").exists(), False)
+
+    def test_update_event(self):
+        time = datetime.datetime.now()
+        event = Event(tittel="Test", dato=time, beskrivelse="Hello")
+        event.save()
+        event.updateEvent("Test2", time, "Is it me you're looking for")
+        self.assertEqual(Event.objects.get(pk = event.pk).tittel, "Test2")
+        self.assertEqual(Event.objects.get(pk = event.pk).beskrivelse, "Is it me you're looking for")

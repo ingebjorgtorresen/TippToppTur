@@ -1,5 +1,6 @@
 
 
+from sqlite3 import DateFromTicks
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import *
@@ -30,6 +31,11 @@ class Event(models.Model):
     def deleteEvent(self):
         event = Event.objects.filter(pk = self.pk)
         event.delete()
+        return True
+
+    def updateEvent(self, tittel, dato, beskrivelse):
+        event = Event.objects.filter(pk = self.pk)
+        event.update(tittel = tittel, dato = dato, beskrivelse = beskrivelse)
         return True
 
     def __str__(self):
