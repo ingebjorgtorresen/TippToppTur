@@ -26,33 +26,14 @@
             Meld på tur
         </a>
         {% else %}
-            <div class="container">
-                <a class="btn btn-danger" role="button" href="../event_page/register_events?id={{id}}">
-                Meld av tur
-                </a>
-            </div>
-            <div class="container" style="margin-top: 5%;">
-                <h4>Påmeldte:</h4>
-                {% block content %}
-                {% for registrert in registrert %}
-                <p>{{registrert.user_pk}}</p>
-                {% endfor %}
-                {% endblock %}
-            </div>
-                
-            {% endif %}
-            {% if arrangør == request.user.fullName or request.user.is_superuser %}
-            <a class="btn btn-danger" role="button" href="../../delete_event?id={{id}}">Slett arrangement</a>
+            <a class="btn btn-danger" role="button" href="../event_page/register_events?id={{id}}">
+            Meld av tur
+            </a>
             {% endif %}
             {% endif %}
-
     {% else %}
         <h1>Arrangementet finnes ikke</h1>
-
-        {% endif %}
-        {% if not request.user.is_authenticated %}
-        <p><em>Du må være pålogget for å melde deg på et arrangement!</em></p>
-        {% endif %}
+    {% endif %}
     </div>
     <div>
 </body>
