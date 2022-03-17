@@ -101,13 +101,17 @@ def register_serious_user(request):
         request.session["error"] = "Passordene må matche!!"
         return redirect("register_serious")
 
-    last_name = names[1]
-    if len(names) >= 3:
-        for x in names[2:]:
-            last_name += (" " + x)
+    if (len(names) <= 1):
+        request.session["error"] = "Du må skrive fullt navn!!"
+        return redirect('register')
+    else:
+        last_name = names[1]
+        if len(names) >= 3:
+            for x in names[2:]:
+                last_name += (" " + x)
 
     user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0],
-                    last_name=last_name, seriøsaktør=True)
+                    last_name=last_name, seriøsaktør=True,fødselsdato=None)
     user.save()
 
     user = authenticate(request, username=username, password=password)
@@ -209,7 +213,7 @@ def register_user(request):
         request.session["error"] = "Passordene må matche!!"
         return redirect("register")
 
-    if (len(names)<1):
+    if (len(names)<=1):
         request.session["error"] = "Du må skrive fullt navn!!"
         return redirect('register')
     else:
