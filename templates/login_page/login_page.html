@@ -13,16 +13,15 @@
       {% if not request.user.is_authenticated %}
       <div class="form-group">
         <label for="exampleInputEmail1">Brukernavn</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Skriv inn brukernavn" name="username">
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Skriv inn brukernavn" name="username" required>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Passord</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Skriv inn passord" name="password">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Skriv inn passord" name="password" required>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-success login">Logg inn</button>
       </div>
-
   </form>
   <form id="register_url" class = "container" action="{% url 'register' %}">
     <div class="form-group">
@@ -34,5 +33,10 @@
           </div>
       {% endif %}
   </form>
+  {% if messages %}
+  {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
 </div>
 </div>
