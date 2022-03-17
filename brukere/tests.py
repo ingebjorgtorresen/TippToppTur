@@ -8,7 +8,7 @@ class UserModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up model used by tests
-        Turgåere.objects.create(by="Trondheim", telefonnummer="112", ferdighetsnivå="nybegynner", seriøsaktør=True)
+        Turgåere.objects.create(by="Trondheim", telefonnummer="112", ferdighetsnivå="nybegynner")
 
     def test_city_is_correct(self):
         user = Turgåere.objects.get(id=1)
@@ -39,12 +39,6 @@ class UserModelTest(TestCase):
         user = Turgåere.objects.get(id=1)
         max = user._meta.get_field('ferdighetsnivå').max_length
         self.assertEqual(max, 20)
-
-
-    def test_seriøsaktør(self):
-        user = Turgåere.objects.get(id=1)
-        seriøs = user.isSeriøsAktør()
-        self.assertTrue(seriøs)
 
 class registerTestCase(TestCase):
     def testRegister(self):
