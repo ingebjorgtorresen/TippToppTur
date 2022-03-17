@@ -8,36 +8,31 @@
     <body>
     {% if not request.user.is_authenticated %}
         <div class="container">
-        <div>
-            &nbsp;
-        </div>
-         <a class="btn btn-outline-success btn-sm" href="{% url 'register_serious' %}">
-            Registrer bedriftsbruker
+        <div>  &nbsp;
+            </div>
+
+        <a class="btn btn-outline-success btn-sm"" href="{% url 'register' %}">
+            Registrer bruker
         </a>
             <div>  &nbsp;
             </div>
 
-        <h1>Opprett bruker</h1>
-        <form id="eventform" action="{% url 'register_user' %}" method="post">
+        <h1>Opprett seriøs bruker</h1>
+        <form id="eventform" action="{% url 'register_serious_user' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="username">Brukernavn:</label>
+                <label for="username">Innloggingsnavn:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="username">E-mail:</label>
+                <label for="username">Bedrifts-mail:</label>
                 <input type="email" class="form-control" id="mail" name="mail" required>
                 <span></span>
             </div>
             <div class="form-group">
-                <label for="username">Fullt navn:</label>
+                <label for="username">Bedriftens navn:</label>
                 <input type="text" class="form-control" id="navn" name="navn" required>
-                <span></span>
-            </div>
-            <div class="form-group">
-                <label for="fødselsdato">Fødselsdato: (Du må være minst 13 år for å bruke appen!)</label>
-                <input type="date" class="form-control" id="date" name="date" required max= {{ datoidag }}>
                 <span></span>
             </div>
             <div class="form-group">
@@ -50,14 +45,14 @@
                 <input type="password" id="password2" class="form-control" name="password2" required>
                 <span></span>
             </div>
-
-            <button type="submit" class="btn btn-success">
-                Send inn!
-            </button>
+    
+    <button type="submit" class="btn btn-success">
+        Send inn!
+    </button>
         </form>
         <p>{{ error }}</p>
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
 
-</body>
+    </body>
 </html>

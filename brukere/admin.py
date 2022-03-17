@@ -11,7 +11,8 @@ class CustomUserAdmin(UserAdmin):
             'by',
             'telefonnummer',
             'ferdighetsnivå',
-            'fødselsdato'
+            'seriøsaktør',
+            'fødselsdato',
         )}),
     )
 

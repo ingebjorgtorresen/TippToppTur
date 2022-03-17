@@ -21,6 +21,7 @@
         <br>
         <p> {{ description }}</p>
         {% if request.user.is_authenticated %}
+        {% if not request.user.seriøsaktør %}
         {% if not påmeldt %}
         <a class="btn btn-success" role="button" href= '../event_page/register_events?id={{id}}'>
             Meld på tur
