@@ -28,8 +28,18 @@ def deleteEvent(request):
 def editEvent(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
+    dato1 = str(event.dato)
+    dato = dato1.split(' ') #['2111-12-12', '20:22:00+00:00']
+    dato2 = dato[1].split(':')
+    del dato2[3]
+    del dato2[2]
+    dato2[0] = str(int(dato2[0])+1)
+    dato2 = ':'.join(dato2)
+    dato[1] = dato2
+    dato = 'T'.join(dato)
+    print(dato)
     context = {'tittel': event.tittel,
-    'dato' : str(event.dato),
+    'dato' : dato, 
     'beskrivelse': event.beskrivelse,
     'pk': event.pk}
     return render(request, 'edit_event/edit_event_form.html', context)
