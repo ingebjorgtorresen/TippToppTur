@@ -61,3 +61,10 @@ class registerTestCase(TestCase):
         self.assertEqual(turgåer.unRegister(event), True)
         self.assertEqual(turgåer.unRegister(event), False)
         self.assertEqual(User_registration.objects.filter(user_pk=turgåer, event_pk=event).exists(), False)
+
+    def testDeleteEvent(self):
+        turgåer = Turgåere.objects.create(username="Test", password="password12321")
+        event = Event.objects.create(tittel="test", arrangør=turgåer, beskrivelse="test", dato="2022-02-17")
+        self.assertEqual(turgåer.register(event), True)
+        event.delete()
+        self.assertEqual(turgåer.unRegister(event), False) #Cascade
