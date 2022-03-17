@@ -52,16 +52,6 @@ def register_serious_user(request):
         request.session["error"] = "Må spesifisere navne!!"
         return redirect("register_serious")
 
-    names = name.split(" ")
-    if len(name) <= 1:
-        request.session["error"] = "Må spesifisere fornavn og etternavn!!"
-        return redirect("register_serious")
-
-    for name in names:
-        if len(name) < 1:
-            request.session["error"] = "Ugyldig format!!"
-            return redirect("register_serious")
-
     # Test passwords
     if (password is None or len(password) < 8):
         request.session["error"] = "Password is too short!!"

@@ -49,10 +49,23 @@ def new_event(request):
             return redirect('event_form')
         # Frem i tid
 
-
-    e = Event(tittel=request.POST['title'],
-              dato=datoen1,
-              beskrivelse=request.POST['description'],
-              arrangør=request.user.get_full_name())
+    if (request.user.seriøsaktør):
+        pris_s = request.POST['pris']
+        if pris_s == "":
+            pris = 0
+        else:
+            pris = int(pris_s)
+        
+        e = Event(tittel=request.POST['title'],
+                dato=datoen1,
+                beskrivelse=request.POST['description'],
+                arrangør=request.user.get_full_name(),
+                seriøsaktør=True,
+                pris=pris)
+    else:
+        e = Event(tittel=request.POST['title'],
+                dato=datoen1,
+                beskrivelse=request.POST['description'],
+                arrangør=request.user.get_full_name())
     e.save()
     return redirect("trips")

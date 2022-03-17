@@ -10,8 +10,11 @@
     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
     <div class="card-body">
       <h4 class="card-title">{{tittel.tittel}}</h4>
-
-        <p class="card-text"style="font-size:14px"> Arrangør: {{tittel.arrangør}}</p>
+        
+        <p class="card-text"style="font-size:14px"> Arrangør: {{tittel.arrangør}} 
+          {% if tittel.seriøsaktør %}
+            <span class="badge badge-pill badge-success" style="font-size:13px">Verifisert bruker</span>
+          {% endif %}</p>
         <p class="card-text"style="font-size:14px"> Dato: {{tittel.dato}}</p>
 
       <p class="card-text"><I>{{tittel.beskrivelse}}</I></p>

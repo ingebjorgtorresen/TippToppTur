@@ -28,6 +28,14 @@
                 <span></span>
                 <p>{{ error }}</p>
             </div>
+
+            {% if request.user.seriøsaktør %}
+                <div class="form-group">
+                    <label for="description">Pris per pers (valgfri):</label>
+                    <input rows="10" cols="100" id="pris" class="form-control" name="pris" form="eventform" value="0"></input>
+                </div>
+            {% endif %}
+
             <div class="form-group">
                 <label for="description">Beskrivelse av turen (valgfri):</label>
                 <textarea rows="10" cols="100" id="description" class="form-control" name="description" form="eventform"></textarea>

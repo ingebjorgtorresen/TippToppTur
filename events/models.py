@@ -27,6 +27,8 @@ class Event(models.Model):
     beskrivelse = models.TextField(blank=False, default='')
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
+    seriøsaktør = models.BooleanField(default=False)
+    pris = models.IntegerField(default=0)
 
     def deleteEvent(self):
         event = Event.objects.filter(pk = self.pk)
