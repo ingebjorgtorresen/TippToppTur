@@ -31,7 +31,7 @@ class Turgåere(AbstractUser):
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
     fødselsdato = models.DateField(verbose_name='Fødselsdato', blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['fødselsdato']
-
+#Endring
     def fullName(self):
         return self.first_name + " " + self.last_name
 
