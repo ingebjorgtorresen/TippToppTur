@@ -52,15 +52,20 @@ def new_event(request):
 
     lengde = request.POST.get('lengde')
     if not lengde:
-        lengde = None; 
+        lengde = None;
 
+    e = Event(tittel=request.POST['title'],
+              dato=datoen1,
+              beskrivelse=request.POST['description'],
+              arrangør=request.user.get_full_name(),
+              bilde = request.FILES['upload'])
     if (request.user.seriøsaktør):
         pris_s = request.POST['pris']
         if pris_s == "":
             pris = 0
         else:
             pris = int(pris_s)
-        
+
         e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
@@ -68,6 +73,7 @@ def new_event(request):
                 seriøsaktør=True,
                 pris=pris,
                 arrangør_username=request.user.username,
+                  bilde=request.FILES['upload'],
                 destinasjon=request.POST['destination'],
                 terreng=request.POST.get('terreng'),
                 utstyr = request.POST.get('utstyr'),
@@ -80,13 +86,13 @@ def new_event(request):
                 beskrivelse=request.POST['description'],
                 arrangør=request.user.get_full_name(),
                 arrangør_username=request.user.username,
+                  bilde=request.FILES['upload'],
                 destinasjon=request.POST['destination'],
                 terreng=request.POST.get('terreng'),
                 utstyr = request.POST.get('utstyr'),
                 lengde = lengde,
                 vanskelighetsgrad = request.POST.get('grad')
                 )
-              
+
     e.save()
     return redirect("trips")
-

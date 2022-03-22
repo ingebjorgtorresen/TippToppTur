@@ -1,16 +1,16 @@
 {% include "base.html" %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <head>
-        <meta charset="UTF-8">
-        <title>Opprett turarrangement</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/form.css' %}">
-    </head>
-    
-    <body>
-        <div class="container">
-        <h1>Opprett turarrangement</h1>
-        <form id="eventform" action="{% url 'new_event' %}" method="post">
+<head>
+    <meta charset="UTF-8">
+    <title>Opprett turarrangement</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+<div class="container">
+    <h1>Opprett turarrangement</h1>
+    <form id="eventform" action="{% url 'new_event' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="title">Tittel:</label>
@@ -39,7 +39,10 @@
             <div class="form-group">
                 <label for="description">Beskrivelse av turen (valgfri):</label>
                 <textarea rows="10" cols="100" id="description" class="form-control" name="description" form="eventform"></textarea>
-            </div>
+            </div><div class="form-group">
+            <p>Last opp et bilde!</p></br>
+                <input type="file" name="upload" accept="image/*">
+        </div>
 
             <div class="form-group">
                 <label for="grad">Vanskelighetsgrad:</label>
@@ -51,7 +54,7 @@
                 </select>
             </div>
 
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tillegsinfo" aria-expanded="false" 
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tillegsinfo" aria-expanded="false"
             aria-controls="collapseExample">Vis tillegsinfo</button>
 
             <div class="collapse" id="tillegsinfo">
@@ -59,20 +62,20 @@
                     <label for="utstyr">Utstyr som kreves (valgfri):</label>
                     <input type="text" class="form-control" id="utstyr" name="utstyr" form="eventform"></textarea>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="terreng">Turens terreng (valgfri):</label>
                     <input type="text" class="form-control" id="terreng" name="terreng" form="eventform"></textarea>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="lengde">Lengde i km (valgfri):</label>
                     <input type="number" class="form-control" id="lengde" name="lengde" form="eventform"></textarea>
                 </div>
             </div>
-    <button type="submit" class="btn btn-success">
-        Send inn!
-    </button>
-        </form>
-        </div>
-    </body>
+        <button type="submit" class="btn btn-success">
+            Send inn!
+        </button>
+    </form>
+</div>
+</body>

@@ -5,9 +5,9 @@
 
 {% for tittel in tittel %}
 
-<div class="card-deck">
+<div class="card-group">
 <div class="card mx-auto" style="width: 18rem;">
-    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+     <img class="card-img-top" style="max-width: 18rem" src="/static/images/{{ tittel.bilde }}" alt="Card image cap">
     <div class="card-body">
       <h4 class="card-title">{{tittel.tittel}}</h4>
         
@@ -23,5 +23,4 @@
   </div>
 </div>
   {% endfor %}
-
   {% endblock %}

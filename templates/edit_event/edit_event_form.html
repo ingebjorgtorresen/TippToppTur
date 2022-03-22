@@ -1,44 +1,51 @@
 {% include "base.html" %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rediger turarrangement</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/form.css' %}">
-    </head>
-    
-    <body>
-        <div class="container">
-        <h1>Rediger turarrangement</h1>
-        <form id="eventform" action="{% url 'updateEvent' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="title">Tittel:</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{tittel}}" required>
-                <span></span>
-            </div>
-            <div class="form-group">
-                <label for="destination">Destinasjon:</label>
-                <input type="text" id="destination" class="form-control" name="destination" value="Ikke implementert ennå" disabled required>
-                <span></span>
-            </div>
-            <div class="form-group">
-                <label for="date">Dato:</label>
-                <input type="datetime-local" id="date" class="form-control" name="date" value="{{dato}}" required min={{ datoidag }}>
-                <span></span>
-                <p>{{ error }}</p>
-            </div>
-            <div class="form-group">
-                <label for="description">Beskrivelse av turen (valgfri):</label>
-                <textarea rows="10" cols="100" id="description" class="form-control" name="description" form="eventform">{{beskrivelse}}</textarea>
-            </div>
-            <div class="form-group">
-                <input type="hidden" value="{{pk}}", id="primaykey", name="primarykey">
-            </div>
-    
-    <button type="submit" class="btn btn-success">
-        Send inn!
-    </button>
-        </form>
+<head>
+    <meta charset="UTF-8">
+    <title>Rediger turarrangement</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+<div class="container">
+    <h1>Rediger turarrangement</h1>
+    <form id="eventform" action="{% url 'updateEvent' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Tittel:</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ tittel }}" required>
+            <span></span>
         </div>
-    </body>
+        <div class="form-group">
+            <label for="destination">Destinasjon:</label>
+            <input type="text" id="destination" class="form-control" name="destination" value="Ikke implementert ennå"
+                   disabled required>
+            <span></span>
+        </div>
+        <div class="form-group">
+            <label for="date">Dato:</label>
+            <input type="datetime-local" id="date" class="form-control" name="date" value="{{ dato }}" required
+                   min={{ datoidag }}>
+            <span></span>
+            <p>{{ error }}</p>
+        </div>
+        <div class="form-group">
+            <label for="description">Beskrivelse av turen (valgfri):</label>
+            <textarea rows="10" cols="100" id="description" class="form-control" name="description"
+                      form="eventform">{{ beskrivelse }}</textarea>
+        </div>
+        <div class="form-group">
+            <p>Last opp et bilde!</p></br>
+            <input type="file" name="upload" accept="image/*">
+        </div>
+        <div class="form-group">
+            <input type="hidden" value="{{ pk }}" , id="primaykey" , name="primarykey">
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Send inn!
+        </button>
+    </form>
+</div>
+</body>

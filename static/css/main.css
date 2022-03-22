@@ -4762,13 +4762,14 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-    width: 100%;
+    width: 50%;
 }
 
 .card-img,
 .card-img-top {
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
+    border-top-left-radius: 0.175rem;
+    border-top-right-radius: 0.175rem;
+    max-width: 200px;
 }
 
 .card-img,

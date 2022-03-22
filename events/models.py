@@ -24,9 +24,6 @@ def validate_date(dato):
 def validate_date_bool(dato):
     return dato < timezone.now()
 
-
-
-
 class Event(models.Model):
     tittel = models.CharField(
         max_length=255,
@@ -37,7 +34,8 @@ class Event(models.Model):
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateTimeField(null=True,blank=False, validators=[validate_date])
     beskrivelse = models.TextField(blank=False, default='')
-    #Klasse som definerer valg for vankselighetsgrad 
+    bilde = models.ImageField(upload_to='static/uploads/eventimages/', blank=True)
+    #Klasse som definerer valg for vankselighetsgrad
     class Grad(models.TextChoices):
         ENKEL = 'Enkel'
         MIDDELS = 'Middels'
