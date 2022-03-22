@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +20,8 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'theme/css/styles.css' %}" rel="stylesheet"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-219108580-1"> </script>
 </head>
 {% include 'navbar.html' %}
