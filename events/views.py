@@ -65,5 +65,4 @@ def search_results(request):
     'sorter': request.GET['sorter'],
     'vanskelighetsgrad': request.GET['vanskelighetsgrad'],
     'utstyr': request.GET['utstyr']}
-    print(request.GET['utstyr'])
     return render(request, 'landing_page/trips.html', context)
