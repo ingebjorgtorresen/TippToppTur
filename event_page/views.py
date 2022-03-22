@@ -31,15 +31,20 @@ def event_page(request):
             'påmeldt': request.user.isRegistered(Event.objects.get(pk=id)),
             'registrert': registrert,
             'stillAvailable': stillAvailable,
+            'bilde' : event.bilde,
         }
+        #Tror denne catcher brukere som ikke er logget inn?
     except AttributeError:
         context = {'exists': True,
                    'title': event.tittel,
-                   'date': event.dato,
+                   'date': eventdate,
                    'arrangør': event.arrangør,
                    'destination': "Kommer senere",
                    'description': event.beskrivelse,
+                   'stillAvailable': stillAvailable,
+                   'bilde': event.bilde,
                    }
+        #Kommer dersom det ikke eksisterer noe event
     except Event.DoesNotExist:
         context = {
             'exists': False,

@@ -25,8 +25,11 @@ class Event(models.Model):
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateTimeField(null=True,blank=False, validators=[validate_date])
     beskrivelse = models.TextField(blank=False, default='')
-    bilde = models.ImageField(upload_to='static/uploads/', blank=True)
+    bilde = models.ImageField(upload_to='static/uploads/eventimages/', blank=True)
     synlig = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "myapp_image"
 
     def deleteEvent(self):
         event = Event.objects.filter(pk = self.pk)

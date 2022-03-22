@@ -53,6 +53,7 @@ def new_event(request):
     e = Event(tittel=request.POST['title'],
               dato=datoen1,
               beskrivelse=request.POST['description'],
-              arrangør=request.user.get_full_name())
+              arrangør=request.user.get_full_name(),
+              bilde = request.FILES['upload'])
     e.save()
     return redirect("trips")
