@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<form action="" method="get">
+<form action="{% url 'search_results' %}" method="get">
   <label for="navn">Navn: </label>
   <input id="navn" name="navn" type="text" placeholder="Søk her">
   <label for="sorter">Sorter etter: </label>
@@ -23,8 +23,12 @@
     <option value="Krevende">Krevende</option>
     <option value="Ekstra Krevende">Ekstra Krevende</option>
   </select>
-  <label for ="utstyr">Ikke utstyr: </label>
-  <input id="utstyr" name="utstyr" type="checkbox">
+  <label for="utstyr">Krever utstyr: </label>
+  <select id="utstyr" name="utstyr">
+    <option value="alle">Alle</option>
+    <option value="on">Må ha utstyr</option>
+    <option value="off">Må være uten utstyr</option>
+  </select>
   <button type="submit" class="btn btn-success">Søk!</button>
 </form>
 

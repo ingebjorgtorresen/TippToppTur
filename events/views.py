@@ -51,4 +51,19 @@ def updateEvent(request):
     return redirect("trips")
 
 def search_results(request):
-    pass
+    user = request.user
+    event = Event.objects.all()
+    context = {'tittel': event,
+    'arrangør' : event,
+    'dato' : event,
+    'beskrivelse': event,
+    'bilde' : event,
+    'user': user.is_authenticated,
+    'name': user.username,
+    'view': True,
+    'søkenavn': request.GET['navn'],
+    'sorter': request.GET['sorter'],
+    'vanskelighetsgrad': request.GET['vanskelighetsgrad'],
+    'utstyr': request.GET['utstyr']}
+    print(request.GET['utstyr'])
+    return render(request, 'landing_page/trips.html', context)
