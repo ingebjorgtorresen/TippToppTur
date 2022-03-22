@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from pydoc import TextRepr
 
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
@@ -49,6 +50,10 @@ def new_event(request):
             return redirect('event_form')
         # Frem i tid
 
+    lengde = request.POST.get('lengde')
+    if not lengde:
+        lengde = None; 
+
     if (request.user.seriøsaktør):
         pris_s = request.POST['pris']
         if pris_s == "":
@@ -63,13 +68,25 @@ def new_event(request):
                 seriøsaktør=True,
                 pris=pris,
                 arrangør_username=request.user.username,
-                destinasjon=request.POST['destination'])
+                destinasjon=request.POST['destination'],
+                terreng=request.POST.get('terreng'),
+                utstyr = request.POST.get('utstyr'),
+                lengde = lengde,
+                vanskelighetsgrad = request.POST.get('grad')
+                )
     else:
         e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
                 arrangør=request.user.get_full_name(),
                 arrangør_username=request.user.username,
-                destinasjon=request.POST['destination'])
+                destinasjon=request.POST['destination'],
+                terreng=request.POST.get('terreng'),
+                utstyr = request.POST.get('utstyr'),
+                lengde = lengde,
+                vanskelighetsgrad = request.POST.get('grad')
+                )
+              
     e.save()
     return redirect("trips")
+

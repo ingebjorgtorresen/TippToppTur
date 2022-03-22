@@ -17,8 +17,14 @@
         <i><p><font size="-1"> Dato: {{ date }} </font></p>
             <p><font size="-1"> Arrangør: {{ arrangør }} </font></p>
             <p><font size="-1"> Destinasjon: {{ destination }} </font></p>
+            <p><font size="-1"> Vanskelighetsgrad: {{ grad }} </font></p>
+            <p><font size="-1"> Utstyr: {{ utstyr|default:"ikke spesifisert" }} </font></p>
+            <p><font size="-1"> Terreng: {{ terreng|default:"ikke spesifisert" }} </font></p>
+            <p><font size="-1">Lengde: {{ lengde|default_if_none:"ikke spesifisert" }}</font></p>
+
         </i>
         <br>
+        <h4>Beskrivelse</h4>
         <p> {{ description }}</p>
         {% if request.user.is_authenticated %}
             {% if stillAvailable %}

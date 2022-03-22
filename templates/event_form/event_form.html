@@ -40,7 +40,36 @@
                 <label for="description">Beskrivelse av turen (valgfri):</label>
                 <textarea rows="10" cols="100" id="description" class="form-control" name="description" form="eventform"></textarea>
             </div>
+
+            <div class="form-group">
+                <label for="grad">Vanskelighetsgrad:</label>
+                <select class="form-control" id="grad" name="grad" form="eventform">
+                    <option value="Enkel">Enkel</option>
+                    <option value="Middels">Middels</option>
+                    <option value="Krevende">Krevende</option>
+                    <option value="Ekstra Krevende">Ekstra Krevende</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tillegsinfo" aria-expanded="false" 
+            aria-controls="collapseExample">Vis tillegsinfo</button>
+
+            <div class="collapse" id="tillegsinfo">
+                <div class="form-group">
+                    <label for="utstyr">Utstyr som kreves (valgfri):</label>
+                    <input type="text" class="form-control" id="utstyr" name="utstyr" form="eventform"></textarea>
+                </div>
     
+                <div class="form-group">
+                    <label for="terreng">Turens terreng (valgfri):</label>
+                    <input type="text" class="form-control" id="terreng" name="terreng" form="eventform"></textarea>
+                </div>
+    
+                <div class="form-group">
+                    <label for="lengde">Lengde i km (valgfri):</label>
+                    <input type="number" class="form-control" id="lengde" name="lengde" form="eventform"></textarea>
+                </div>
+            </div>
     <button type="submit" class="btn btn-success">
         Send inn!
     </button>

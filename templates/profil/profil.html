@@ -1,0 +1,75 @@
+{% include "base.html" %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<div class="row col-8 offset-2 bg-light">
+
+    <div class="container">
+        <h1>Min side</h1>
+        {% if request.user.isSeriøsAktør %}
+            <i><p><font size="-1"> Bedriftens navn: {{ request.user.first_name }} {{ request.user.last_name }} </font></p>
+                <p><font size="-1"> Innloggingsnavn: {{ request.user.username }} </font></p>
+                <p><font size="-1"> Epost: {{ request.user.email }} </font></p>
+            </i>
+            <br>
+
+        {% else %}
+            <i><p><font size="-1"> Fornavn: {{ request.user.first_name }} </font></p>
+                <p><font size="-1"> Etternavn: {{ request.user.last_name }} </font></p>
+                <p><font size="-1"> Fødselsdato: {{ request.user.fødselsdato }} </font></p>
+                <p><font size="-1"> Epost: {{ request.user.email }} </font></p>
+            </i>
+            <br>
+            <a class="btn btn-success" role="button" href= '../profil/editprofile'>
+                Rediger informasjon
+            </a>
+            <br>
+            <br>
+            <h3>Påmeldte arrangement</h1>
+        {% for userEvent in userEvents %}
+        {% if userEvent.event_pk.hasHappened == False %}
+
+        <div class="card-deck">
+            <div class="card mx-auto" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h4 class="card-title">{{userEvent.event_pk.tittel}}</h4>
+                    <p class="card-text"style="font-size:14px">{{userEvent.event_pk.dato}}</p>
+                  <p class="card-text"><I>{{userEvent.event_pk.beskrivelse}}</I></p>
+                  <a href="../event_page?id={{userEvent.event_pk.pk}}" class="btn btn-success">Se detaljer</a>
+                </div>
+              </div>
+            </div>
+
+        {% endif %}
+        {% endfor %}
+
+        <h3>Tidligere arrangement</h3>
+
+        {% for userEvent in userEvents %}
+        {% if userEvent.event_pk.hasHappened %}
+        <div class="card-deck">
+            <div class="card mx-auto" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h4 class="card-title">{{userEvent.event_pk.tittel}}</h4>
+                    <p class="card-text"style="font-size:14px">{{userEvent.event_pk.dato}}</p>
+                  <p class="card-text"><I>{{userEvent.event_pk.beskrivelse}}</I></p>
+                  <a href="../event_page?id={{userEvent.event_pk.pk}}" class="btn btn-success">Se detaljer</a>
+                </div>
+              </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+  {% endif %}
+
+        <p></p>
+    </div>
+
+</div>
+
+</body>
+</html>
