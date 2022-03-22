@@ -35,10 +35,12 @@
             <textarea rows="10" cols="100" id="description" class="form-control" name="description"
                       form="eventform">{{ beskrivelse }}</textarea>
         </div>
+        {% comment %}
         <div class="form-group">
             <p>Last opp et bilde!</p></br>
             <input type="file" name="upload" accept="image/*">
         </div>
+        {% endcomment %}
         <div class="form-group">
             <input type="hidden" value="{{ pk }}" , id="primaykey" , name="primarykey">
         </div>
