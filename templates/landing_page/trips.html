@@ -3,6 +3,20 @@
 
 {% block content %}
 
+<form action="" method="get">
+  <label for="navn">Navn: </label>
+  <input name="navn" type="text" placeholder="Søk her">
+  <label for="vanskelighetsgrad">Vanskelighetsgrad: </label>
+  <select id="vanskelighetsgrad" name="vanskelighetsgrad">
+    <option value="Alle">Alle</option>
+    <option value="Enkel">Enkel</option>
+    <option value="Middels">Middels</option>
+    <option value="Krevende">Krevende</option>
+    <option value="Ekstra Krevende">Ekstra Krevende</option>
+  </select>
+  <button type="submit" class="btn btn-success">Søk!</button>
+</form>
+
 {% for tittel in tittel %}
 
 <div class="card-deck">

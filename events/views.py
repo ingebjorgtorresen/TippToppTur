@@ -49,3 +49,6 @@ def updateEvent(request):
     e = Event.objects.get(pk=request.POST['primarykey'])
     e.updateEvent(request.POST['title'], date, request.POST['description'])
     return redirect("trips")
+
+def search_results(request):
+    pass
