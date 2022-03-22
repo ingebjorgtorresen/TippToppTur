@@ -25,7 +25,8 @@ def event_page(request):
             'title': event.tittel,
             'date': eventdate,
             'arrangør': event.arrangør,
-            'destination': "Kommer senere",
+            'arrangør_username': event.arrangør_username,
+            'destination': event.destinasjon,
             'description': event.beskrivelse,
             'utstyr': event.utstyr,
             'grad': event.vanskelighetsgrad,
@@ -41,7 +42,7 @@ def event_page(request):
                    'title': event.tittel,
                    'date': event.dato,
                    'arrangør': event.arrangør,
-                   'destination': "Kommer senere",
+                   'destination': event.destinasjon,
                    'description': event.beskrivelse,
                    }
     except Event.DoesNotExist:

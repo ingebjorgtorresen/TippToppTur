@@ -30,6 +30,7 @@ class Turgåere(AbstractUser):
     telefonnummer = models.CharField(max_length=12, blank=False, default='')
     ferdighetsnivå = models.CharField(choices=experience, blank=False, max_length=20, default=" ")
     seriøsaktør = models.BooleanField(default=False)
+    bedriftsaddresse = models.CharField(default='', max_length=50)
     fødselsdato = models.DateField(verbose_name='Fødselsdato', blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['fødselsdato']
 #Endring

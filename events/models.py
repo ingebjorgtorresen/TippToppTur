@@ -1,5 +1,7 @@
 
 
+
+from datetime import timezone
 from email.policy import default
 from pyexpat import model
 from random import choices
@@ -31,6 +33,7 @@ class Event(models.Model):
         blank=False,
     )
     arrangør = models.CharField(max_length=40,default='')
+    arrangør_username = models.CharField(max_length=50,default='')
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateTimeField(null=True,blank=False, validators=[validate_date])
     beskrivelse = models.TextField(blank=False, default='')
@@ -51,6 +54,9 @@ class Event(models.Model):
     utstyr = models.CharField(max_length=40, default='', null=True)
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
+    seriøsaktør = models.BooleanField(default=False)
+    pris = models.IntegerField(default=0)
+    destinasjon = models.CharField(max_length=80,default='')
 
     def deleteEvent(self):
         event = Event.objects.filter(pk = self.pk)

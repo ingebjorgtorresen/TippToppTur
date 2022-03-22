@@ -12,6 +12,7 @@ class EventModelTest(TestCase):
         Turgåere.objects.create(by = "Trondheim", telefonnummer = "112", ferdighetsnivå = "nybegynner")
         bruker = Turgåere.objects.get(id=1)
         Event.objects.create(tittel = "Test event", dato = "2023-10-23", arrangør = bruker, beskrivelse = "en fin tur med gutta", bilde = None, synlig = True )
+        Event.objects.create(tittel = "Test seriøs event", dato = "2023-10-23", arrangør="Test", beskrivelse="Hei",bilde=None, synlig=True, seriøsaktør=True, pris=105, arrangør_username = "username", destinasjon = "Skogen")
     
     def test_title_label(self):
         event = Event.objects.get(id=1)
@@ -36,17 +37,31 @@ class EventModelTest(TestCase):
 
     def test_date_is_correct(self):
         event = Event.objects.get(id=1)
-        date = datetime.date(2023, 10, 23)
+        date = datetime.datetime(2023, 10, 22, 22, 0, tzinfo=datetime.timezone.utc)
         self.assertEqual(event.dato, date)
 
     def test_date_not_too_old(self):
         event = Event.objects.get(id=1)
-        self.assertTrue(event.dato > datetime.date.today())
+        date = datetime.datetime.today()
+        self.assertTrue(event.dato > datetime.datetime(date.year, date.month, date.day, date.hour, date.minute, tzinfo=datetime.timezone.utc))
 
     def test_descrition_is_correct(self):
         event = Event.objects.get(id=1)
         description = "en fin tur med gutta"
         self.assertEqual(event.beskrivelse, description)
+    
+    def test_seriøst_event(self):
+        event = Event.objects.get(id=2)
+        self.assertEqual(event.pris, 105)
+        self.assertTrue(event.seriøsaktør)
+    
+    def test_user_name(self):
+        event = Event.objects.get(id=2)
+        self.assertEqual("username", event.arrangør_username)
+    
+    def test_destinasjon(self):
+        event = Event.objects.get(id=2)
+        self.assertEqual("Skogen", event.destinasjon)
 
 # Create your tests here.
 class test_event(TestCase):

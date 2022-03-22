@@ -27,6 +27,8 @@ def register_serious_user(request):
     password2 = request.POST["password2"]
     name = request.POST['navn']
     epost = request.POST['mail']
+    addresse = request.POST['addresse']
+    nummer = request.POST['nummer']
 
     # Test username
     if len(username) < 3:
@@ -52,15 +54,19 @@ def register_serious_user(request):
         request.session["error"] = "Må spesifisere navne!!"
         return redirect("register_serious")
 
-    names = name.split(" ")
-    if len(name) <= 1:
-        request.session["error"] = "Må spesifisere fornavn og etternavn!!"
+    # Test number
+    if (len(nummer) < 8):
+        request.session["error"] = "Ugyldig nummer!"
+        return redirect("register_serious")
+    
+    if nummer.isalpha():
+        request.session["error"] = "Ugyldig nummer!"
         return redirect("register_serious")
 
-    for name in names:
-        if len(name) < 1:
-            request.session["error"] = "Ugyldig format!!"
-            return redirect("register_serious")
+    # Test addresse
+    if (addresse is None or addresse == ""):
+        request.session["error"] = "Må spesifisere addresse!"
+        return redirect("register_serious")
 
     # Test passwords
     if (password is None or len(password) < 8):
@@ -101,17 +107,8 @@ def register_serious_user(request):
         request.session["error"] = "Passordene må matche!!"
         return redirect("register_serious")
 
-    if (len(names) <= 1):
-        request.session["error"] = "Du må skrive fullt navn!!"
-        return redirect('register')
-    else:
-        last_name = names[1]
-        if len(names) >= 3:
-            for x in names[2:]:
-                last_name += (" " + x)
-
-    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0],
-                    last_name=last_name, seriøsaktør=True,fødselsdato=None)
+    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=name,
+                    seriøsaktør=True,fødselsdato=None, bedriftsaddresse=addresse, telefonnummer=nummer)
     user.save()
 
     user = authenticate(request, username=username, password=password)
@@ -139,6 +136,7 @@ def register_user(request):
     name = request.POST['navn']
     epost = request.POST['mail']
     fødselsdato = request.POST.get('date', False)
+    nummer = request.POST['nummer']
 
     # Test username
     if len(username) < 3:
@@ -173,6 +171,15 @@ def register_user(request):
         if len(name) < 1:
             request.session["error"] = "Ugyldig format!!"
             return redirect("register")
+
+    # Test number
+    if (len(nummer) < 8):
+        request.session["error"] = "Ugyldig nummer!"
+        return redirect("register_serious")
+    
+    if nummer.isalpha():
+        request.session["error"] = "Ugyldig nummer!"
+        return redirect("register_serious")
 
     # Test passwords
     if (password is None or len(password) < 8):
@@ -222,7 +229,8 @@ def register_user(request):
             for x in names[2:]:
                 last_name += (" " + x)
 
-    user = Turgåere(username=username, password=make_password(password), email=epost, first_name=names[0], last_name=last_name, fødselsdato=fødselsdato)
+    user = Turgåere(username=username, password=make_password(password), email=epost, 
+        first_name=names[0], last_name=last_name, fødselsdato=fødselsdato, telefonnummer=nummer)
     user.save()
     
     user = authenticate(request, username=username, password=password)
