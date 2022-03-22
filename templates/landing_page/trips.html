@@ -5,7 +5,16 @@
 
 <form action="" method="get">
   <label for="navn">Navn: </label>
-  <input name="navn" type="text" placeholder="Søk her">
+  <input id="navn" name="navn" type="text" placeholder="Søk her">
+  <label for="sorter">Sorter etter: </label>
+  <select id="sorter" name="sorter">
+    <option value="dfa">Dato: første/siste</option>
+    <option value="dsa">Dato: siste/første</option>
+    <option value="phl">Påmeldt: høy/lav</option>
+    <option value="plh">Påmeldt: lav/høy</option>
+    <option value="llf">Lengde: lang/kort</option>
+    <option valye="lkf">Lengde: kort/lang</option>
+  </select>
   <label for="vanskelighetsgrad">Vanskelighetsgrad: </label>
   <select id="vanskelighetsgrad" name="vanskelighetsgrad">
     <option value="Alle">Alle</option>
@@ -14,6 +23,8 @@
     <option value="Krevende">Krevende</option>
     <option value="Ekstra Krevende">Ekstra Krevende</option>
   </select>
+  <label for ="utstyr">Ikke utstyr: </label>
+  <input id="utstyr" name="utstyr" type="checkbox">
   <button type="submit" class="btn btn-success">Søk!</button>
 </form>
 
