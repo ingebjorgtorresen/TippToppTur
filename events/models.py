@@ -1,5 +1,6 @@
 
 
+from email.policy import default
 from pyexpat import model
 from random import choices
 from secrets import choice
@@ -33,18 +34,19 @@ class Event(models.Model):
     beskrivelse = models.TextField(blank=False, default='')
     #Klasse som definerer valg for vankselighetsgrad 
     class Grad(models.TextChoices):
-        ENKEL = 'E'
-        MIDDELS = 'M'
-        KREVENDE = 'K'
-        EKSTRA_KREVENDE = 'EK'
+        ENKEL = 'Enkel'
+        MIDDELS = 'Middels'
+        KREVENDE = 'Krevende'
+        EKSTRA_KREVENDE = 'Ekstra Krevende'
 
     vanskelighetsgrad = models.CharField(
-        max_length = 2,
+        max_length = 15,
         choices = Grad.choices,
         default= Grad.ENKEL
     )
     terreng = models.CharField(max_length=40, default='', null=True)
-    lengde = models.IntegerField(null=True)
+    lengde = models.IntegerField(null=True, default=None)
+    utstyr = models.CharField(max_length=40, default='', null=True)
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
 
