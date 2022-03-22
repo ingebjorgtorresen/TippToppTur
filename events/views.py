@@ -52,6 +52,11 @@ def updateEvent(request):
 
 def search_results(request):
     user = request.user
+    søkenavn = request.GET['navn']
+    sorter = request.GET['sorter']
+    vanskelighetsgrad = request.GET['vanskelighetsgrad']
+    utstyr = request.GET['utstyr']
+    #TODO: fiks queries ut fra GET parametre
     event = Event.objects.all()
     context = {'tittel': event,
     'arrangør' : event,
@@ -60,9 +65,5 @@ def search_results(request):
     'bilde' : event,
     'user': user.is_authenticated,
     'name': user.username,
-    'view': True,
-    'søkenavn': request.GET['navn'],
-    'sorter': request.GET['sorter'],
-    'vanskelighetsgrad': request.GET['vanskelighetsgrad'],
-    'utstyr': request.GET['utstyr']}
+    'view': True}
     return render(request, 'landing_page/trips.html', context)
