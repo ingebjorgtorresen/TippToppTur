@@ -1,5 +1,6 @@
 
 
+from datetime import timezone
 from sqlite3 import DateFromTicks
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -22,6 +23,7 @@ class Event(models.Model):
         blank=False,
     )
     arrangør = models.CharField(max_length=40,default='')
+    arrangør_username = models.CharField(max_length=50,default='')
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateTimeField(null=True,blank=False, validators=[validate_date])
     beskrivelse = models.TextField(blank=False, default='')
@@ -29,6 +31,7 @@ class Event(models.Model):
     synlig = models.BooleanField(default=True)
     seriøsaktør = models.BooleanField(default=False)
     pris = models.IntegerField(default=0)
+    destinasjon = models.CharField(max_length=80,default='')
 
     def deleteEvent(self):
         event = Event.objects.filter(pk = self.pk)

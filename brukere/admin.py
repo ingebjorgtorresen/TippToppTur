@@ -13,6 +13,7 @@ class CustomUserAdmin(UserAdmin):
             'ferdighetsnivå',
             'seriøsaktør',
             'fødselsdato',
+            'bedriftsaddresse',
         )}),
     )
 

@@ -12,7 +12,7 @@ class EventModelTest(TestCase):
         Turgåere.objects.create(by = "Trondheim", telefonnummer = "112", ferdighetsnivå = "nybegynner")
         bruker = Turgåere.objects.get(id=1)
         Event.objects.create(tittel = "Test event", dato = "2023-10-23", arrangør = bruker, beskrivelse = "en fin tur med gutta", bilde = None, synlig = True )
-        Event.objects.create(tittel = "Test seriøs event", dato = "2023-10-23", arrangør="Test", beskrivelse="Hei",bilde=None, synlig=True, seriøsaktør=True, pris=105)
+        Event.objects.create(tittel = "Test seriøs event", dato = "2023-10-23", arrangør="Test", beskrivelse="Hei",bilde=None, synlig=True, seriøsaktør=True, pris=105, arrangør_username = "username", destinasjon = "Skogen")
     
     def test_title_label(self):
         event = Event.objects.get(id=1)
@@ -54,6 +54,14 @@ class EventModelTest(TestCase):
         event = Event.objects.get(id=2)
         self.assertEqual(event.pris, 105)
         self.assertTrue(event.seriøsaktør)
+    
+    def test_user_name(self):
+        event = Event.objects.get(id=2)
+        self.assertEqual("username", event.arrangør_username)
+    
+    def test_destinasjon(self):
+        event = Event.objects.get(id=2)
+        self.assertEqual("Skogen", event.destinasjon)
 
 # Create your tests here.
 class test_event(TestCase):

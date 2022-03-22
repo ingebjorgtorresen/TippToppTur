@@ -59,13 +59,17 @@ def new_event(request):
         e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
-                arrangør=request.user.get_full_name(),
+                arrangør=request.user.get_short_name(),
                 seriøsaktør=True,
-                pris=pris)
+                pris=pris,
+                arrangør_username=request.user.username,
+                destinasjon=request.POST['destination'])
     else:
         e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
-                arrangør=request.user.get_full_name())
+                arrangør=request.user.get_full_name(),
+                arrangør_username=request.user.username,
+                destinasjon=request.POST['destination'])
     e.save()
     return redirect("trips")
