@@ -40,8 +40,7 @@ INSTALLED_APPS = [
 
     'events.apps.EventsConfig',
     'brukere.apps.BrukereConfig',
-    'login_page',
-    'star_ratings'
+    'login_page'
 ]
 
 
@@ -74,9 +73,6 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request'
-)
 
 WSGI_APPLICATION = 'Tur.wsgi.application'
 
