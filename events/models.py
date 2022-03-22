@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import *
 from brukere.models import Turgåere
+from datetime import datetime
+from django.utils import timezone
 
 
 # Create your models here.
@@ -40,6 +42,11 @@ class Event(models.Model):
         event = Event.objects.filter(pk = self.pk)
         event.update(tittel = tittel, dato = dato, beskrivelse = beskrivelse)
         return True
+
+    def hasHappened(self):
+        print('test')
+        print(self.dato < timezone.now())
+        return self.dato < timezone.now()
 
     def __str__(self):
         return '{}, Dato: {}'.format(self.tittel, self.dato)
