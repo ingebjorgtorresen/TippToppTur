@@ -57,7 +57,6 @@ def search_results(request):
     sorter = request.GET['sorter']
     vanskelighetsgrad = request.GET['vanskelighetsgrad']
     utstyr = request.GET['utstyr']
-    #TODO: fiks queries ut fra GET parametre
     event = Event.objects.all()
     if søkenavn != '':
         event = event.filter(tittel__contains = søkenavn)
