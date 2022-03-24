@@ -1,7 +1,6 @@
 import datetime
 from django.shortcuts import redirect, render
-
-
+from django.db.models import F, Count
 from .models import Event
 
 
@@ -59,3 +58,44 @@ def updateEvent(request):
     e = Event.objects.get(pk=request.POST['primarykey'])
     e.updateEvent(request.POST['title'], date, request.POST['description'])
     return redirect("trips")
+
+def search_results(request):
+    user = request.user
+    søkenavn = request.GET['navn']
+    sorter = request.GET['sorter']
+    vanskelighetsgrad = request.GET['vanskelighetsgrad']
+    utstyr = request.GET['utstyr']
+    event = Event.objects.all()
+    if søkenavn != '':
+        event = event.filter(tittel__contains = søkenavn)
+    if vanskelighetsgrad != 'Alle':
+        event = event.filter(vanskelighetsgrad = vanskelighetsgrad)
+    if utstyr != 'Alle':
+        if utstyr == 'on':
+            event = event.exclude(utstyr = '')
+        elif utstyr == 'off':
+            event = event.filter(utstyr = '')
+    if sorter == 'dfa':
+        event = event.order_by('dato')
+    elif sorter == 'dsa':
+        event = event.order_by('-dato')
+    elif sorter == 'llk':
+        event = event.order_by(F('lengde').desc(nulls_last=True))
+    elif sorter == 'lkl':
+        event = event.order_by(F('lengde').asc(nulls_last=True))
+    else:
+        event = event.annotate(count = Count('user_registration'))
+        if sorter == 'phl':
+            event = event.order_by('-count')
+        elif sorter == 'plh':
+            event = event.order_by('count')
+
+    context = {'tittel': event,
+    'arrangør' : event,
+    'dato' : event,
+    'beskrivelse': event,
+    'bilde' : event,
+    'user': user.is_authenticated,
+    'name': user.username,
+    'view': True}
+    return render(request, 'landing_page/trips.html', context)

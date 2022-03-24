@@ -3,6 +3,35 @@
 
 {% block content %}
 
+<form action="{% url 'search_results' %}" method="get">
+  <label for="navn">Navn: </label>
+  <input id="navn" name="navn" type="text" placeholder="Søk her">
+  <label for="sorter">Sorter etter: </label>
+  <select id="sorter" name="sorter">
+    <option value="dfa">Dato: første/siste</option>
+    <option value="dsa">Dato: siste/første</option>
+    <option value="phl">Påmeldt: høy/lav</option>
+    <option value="plh">Påmeldt: lav/høy</option>
+    <option value="llk">Lengde: lang/kort</option>
+    <option value="lkl">Lengde: kort/lang</option>
+  </select>
+  <label for="vanskelighetsgrad">Vanskelighetsgrad: </label>
+  <select id="vanskelighetsgrad" name="vanskelighetsgrad">
+    <option value="Alle">Alle</option>
+    <option value="Enkel">Enkel</option>
+    <option value="Middels">Middels</option>
+    <option value="Krevende">Krevende</option>
+    <option value="Ekstra Krevende">Ekstra Krevende</option>
+  </select>
+  <label for="utstyr">Krever utstyr: </label>
+  <select id="utstyr" name="utstyr">
+    <option value="Alle">Alle</option>
+    <option value="on">Må ha utstyr</option>
+    <option value="off">Må være uten utstyr</option>
+  </select>
+  <button type="submit" class="btn btn-success">Søk!</button>
+</form>
+
 {% for tittel in tittel %}
 
 <div class="card-group">
