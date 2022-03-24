@@ -36,7 +36,9 @@
 
 <div class="card-group">
 <div class="card mx-auto" style="width: 18rem;">
-     <img class="card-img-top" style="max-width: 18rem" src="/static/images/{{ tittel.bilde }}" alt="Card image cap">
+    {% if tittel.bilde.exists %}
+    <img class="card-img-top" style="max-width: 18rem" src="/static/images/{{ tittel.bilde }}" alt="Card image cap">
+    {% endif %}
     <div class="card-body">
       <h4 class="card-title">{{tittel.tittel}}</h4>
         
