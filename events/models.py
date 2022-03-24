@@ -41,4 +41,4 @@ class Event(models.Model):
         return True
 
     def __str__(self):
-        return '{}, Dato: {}'.format(self.tittel, self.dato)
+        return '{}, Dato: {}, Antall poeng {}'.format(self.tittel, self.dato, self.points)

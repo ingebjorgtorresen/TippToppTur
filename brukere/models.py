@@ -1,10 +1,8 @@
 import datetime
 from datetime import date
-from socket import PACKET_OUTGOING
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-
 
 # Create your models here.
 from django.db.models.signals import *
@@ -33,22 +31,23 @@ class Turgåere(AbstractUser):
     seriøsaktør = models.BooleanField(default=False)
     fødselsdato = models.DateField(verbose_name='Fødselsdato', blank=True, default=None, null=True)
     REQUIRED_FIELDS = ['fødselsdato']
-#Endring
+
+    # Endring
     def fullName(self):
         return self.first_name + " " + self.last_name
 
     def updateUser(self, fullName, email, date):
         splitName = fullName.split(' ')
-        user = Turgåere.objects.filter(pk = self.pk)
-        user.update(first_name = splitName[0], last_name = splitName[1], email = email, fødselsdato = date)
+        user = Turgåere.objects.filter(pk=self.pk)
+        user.update(first_name=splitName[0], last_name=splitName[1], email=email, fødselsdato=date)
         return True
 
     def updateSeriousUser(self, fullName, email):
         splitName = fullName.split(' ')
-        user = Turgåere.objects.filter(pk = self.pk)
-        user.update(first_name = splitName[0], last_name = splitName[1], email = email)
+        user = Turgåere.objects.filter(pk=self.pk)
+        user.update(first_name=splitName[0], last_name=splitName[1], email=email)
         return True
-        
+
     ##Metoden tar inn et event objekt som argument
     def register(self, event):
         if not self.isRegistered(event):
@@ -65,7 +64,7 @@ class Turgåere(AbstractUser):
         else:
             return False
         return True
-    
+
     def isRegistered(self, event):
         registration = User_registration.objects.filter(user_pk=self, event_pk=event)
         return registration.exists()
@@ -75,31 +74,49 @@ class Turgåere(AbstractUser):
 
     def isSeriøsAktør(self):
         return self.seriøsaktør
-    
+
     def hasUpvote(self, event):
-        upvote = UpvotePoints.objects.filter(user_pk = self, event_pk = event)
-        #points =
-        return points == 1
+        upvote = UpvotePoints.objects.filter(user_pk=self, event_pk=event)
+
+        ableToVote = upvote.filter(points=1)
+        if len(ableToVote) > 0:
+            print("Upvote1")
+            test = upvote.filter(points=-1)
+            print(test)
+            if len(test) > 0:
+                test.delete()
+            return False
+        else:
+            print("Upvote2")
+
+            return True
 
     def hasDownvote(self, event):
-        upvote = UpvotePoints.objects.filter(user_pk = self, event_pk = event)
-        points = UpvotePoints._meta.get_field(points)
-    
-    def upvote(self, event):
-        if not self.hasUpvote:
-            upvote = UpvotePoints(user_pk = self, event_pk = event, points = 1)
-            upvote.save
-        else:
+        upvote = UpvotePoints.objects.filter(user_pk=self, event_pk=event)
+        ableToVote = upvote.filter(points=-1)
+        if len(ableToVote) > 0:
+
+            print("Downvote1")
+            test = upvote.filter(points=1)
+            if len(test) > 0:
+                test.delete()
             return False
+        else:
+            print("Downvote2")
+            return True
+
+    def upvote(self, event):
+        print("bruh")
+        upvote = UpvotePoints(user_pk=self, event_pk=event, points=1)
+        upvote.save()
+
         return True
 
-    def downvote(self,event):
-        if not self.hasDownvote:
-            upvote = UpvotePoints(user_pk = self, event_pk = event, points = -1)
-            upvote.save
-        else:
-            return False
+    def downvote(self, event):
+        upvote = UpvotePoints(user_pk=self, event_pk=event, points=-1)
+        upvote.save()
         return True
+
 
 class User_registration(models.Model):
     user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
@@ -107,6 +124,7 @@ class User_registration(models.Model):
 
     def __str__(self):
         return '{}, {}'.format(self.user_pk, self.event_pk.pk)
+
 
 class UpvotePoints(models.Model):
     user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)

@@ -18,3 +18,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(Turgåere,CustomUserAdmin)
+admin.site.register(UpvotePoints)
