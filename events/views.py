@@ -1,5 +1,8 @@
 import datetime
+import imp
 from django.shortcuts import redirect, render
+
+from brukere.models import UpvotePoints
 from .models import Event
 
 # Create your views here.
@@ -48,4 +51,16 @@ def updateEvent(request):
     date = request.POST['date']
     e = Event.objects.get(pk=request.POST['primarykey'])
     e.updateEvent(request.POST['title'], date, request.POST['description'])
+    return redirect("trips")
+
+def upvote(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    upvote = UpvotePoints.objects.filter(event_pk = id)
+    if not request.user.hasUpvote(event):
+        request.user.upvote(event)
+    else:
+        return False
+    event.points += 1
+    
     return redirect("trips")

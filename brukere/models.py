@@ -1,5 +1,6 @@
 import datetime
 from datetime import date
+from socket import PACKET_OUTGOING
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -74,10 +75,43 @@ class Turgåere(AbstractUser):
 
     def isSeriøsAktør(self):
         return self.seriøsaktør
+    
+    def hasUpvote(self, event):
+        upvote = UpvotePoints.objects.filter(user_pk = self, event_pk = event)
+        #points =
+        return points == 1
+
+    def hasDownvote(self, event):
+        upvote = UpvotePoints.objects.filter(user_pk = self, event_pk = event)
+        points = UpvotePoints._meta.get_field(points)
+    
+    def upvote(self, event):
+        if not self.hasUpvote:
+            upvote = UpvotePoints(user_pk = self, event_pk = event, points = 1)
+            upvote.save
+        else:
+            return False
+        return True
+
+    def downvote(self,event):
+        if not self.hasDownvote:
+            upvote = UpvotePoints(user_pk = self, event_pk = event, points = -1)
+            upvote.save
+        else:
+            return False
+        return True
 
 class User_registration(models.Model):
     user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
     event_pk = models.ForeignKey('events.Event', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}, {}'.format(self.user_pk, self.event_pk.pk)
+
+class UpvotePoints(models.Model):
+    user_pk = models.ForeignKey(Turgåere, on_delete=models.CASCADE)
+    event_pk = models.ForeignKey('events.Event', on_delete=models.CASCADE)
+    points = models.IntegerField(blank=False, default=0)
 
     def __str__(self):
         return '{}, {}'.format(self.user_pk, self.event_pk.pk)

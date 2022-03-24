@@ -17,8 +17,6 @@ def validate_date_bool(dato):
     return dato < timezone.now()
 
 
-
-
 class Event(models.Model):
     tittel = models.CharField(
         max_length=255,
@@ -28,6 +26,7 @@ class Event(models.Model):
         #ForeignKey(Turgåere, on_delete=models.CASCADE, blank=False)
     dato = models.DateTimeField(null=True,blank=False, validators=[validate_date])
     beskrivelse = models.TextField(blank=False, default='')
+    points = models.IntegerField(blank=False, default=0)
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
 
@@ -43,5 +42,3 @@ class Event(models.Model):
 
     def __str__(self):
         return '{}, Dato: {}'.format(self.tittel, self.dato)
-
-
