@@ -54,11 +54,17 @@ def new_event(request):
     if not lengde:
         lengde = None;
 
-    e = Event(tittel=request.POST['title'],
+    try:
+        e = Event(tittel=request.POST['title'],
               dato=datoen1,
               beskrivelse=request.POST['description'],
               arrangør=request.user.get_full_name(),
               bilde = request.FILES['upload'])
+    except:
+        e = Event(tittel=request.POST['title'],
+              dato=datoen1,
+              beskrivelse=request.POST['description'],
+              arrangør=request.user.get_full_name())
     if (request.user.seriøsaktør):
         pris_s = request.POST['pris']
         if pris_s == "":
@@ -66,14 +72,29 @@ def new_event(request):
         else:
             pris = int(pris_s)
 
-        e = Event(tittel=request.POST['title'],
+        try:
+            e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
                 arrangør=request.user.get_short_name(),
                 seriøsaktør=True,
                 pris=pris,
                 arrangør_username=request.user.username,
-                  bilde=request.FILES['upload'],
+                bilde=request.FILES['upload'],
+                destinasjon=request.POST['destination'],
+                terreng=request.POST.get('terreng'),
+                utstyr = request.POST.get('utstyr'),
+                lengde = lengde,
+                vanskelighetsgrad = request.POST.get('grad')
+                )
+        except:
+            e = Event(tittel=request.POST['title'],
+                dato=datoen1,
+                beskrivelse=request.POST['description'],
+                arrangør=request.user.get_short_name(),
+                seriøsaktør=True,
+                pris=pris,
+                arrangør_username=request.user.username,
                 destinasjon=request.POST['destination'],
                 terreng=request.POST.get('terreng'),
                 utstyr = request.POST.get('utstyr'),
@@ -81,12 +102,25 @@ def new_event(request):
                 vanskelighetsgrad = request.POST.get('grad')
                 )
     else:
-        e = Event(tittel=request.POST['title'],
+        try:
+            e = Event(tittel=request.POST['title'],
                 dato=datoen1,
                 beskrivelse=request.POST['description'],
                 arrangør=request.user.get_full_name(),
                 arrangør_username=request.user.username,
-                  bilde=request.FILES['upload'],
+                bilde=request.FILES['upload'],
+                destinasjon=request.POST['destination'],
+                terreng=request.POST.get('terreng'),
+                utstyr = request.POST.get('utstyr'),
+                lengde = lengde,
+                vanskelighetsgrad = request.POST.get('grad')
+                )
+        except:
+            e = Event(tittel=request.POST['title'],
+                dato=datoen1,
+                beskrivelse=request.POST['description'],
+                arrangør=request.user.get_full_name(),
+                arrangør_username=request.user.username,
                 destinasjon=request.POST['destination'],
                 terreng=request.POST.get('terreng'),
                 utstyr = request.POST.get('utstyr'),
