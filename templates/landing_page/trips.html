@@ -10,8 +10,10 @@
     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
     <div class="card-body">
       <h4 class="card-title">{{tittel.tittel}}</h4>
+        {% if request.user.is_authenticated %}
       <a href="upvote/?id={{ tittel.pk }}">up</a>
          <a href="downvote/?id={{ tittel.pk }}">down</a>
+        {% endif %}
         <p>{{ tittel.points }}</p>
 
         <p class="card-text"style="font-size:14px"> Arrangør: {{tittel.arrangør}}</p>
