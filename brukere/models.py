@@ -106,11 +106,14 @@ class Turgåere(AbstractUser):
             return True
 
     def upvote(self, event):
-        print("bruh")
+        userupvotes = UpvotePoints.objects.filter(user_pk=self, event_pk=event)
         upvote = UpvotePoints(user_pk=self, event_pk=event, points=1)
         upvote.save()
 
         return True
+
+    def canVote(self, event):
+        return UpvotePoints.objects.filter(user_pk=self, event_pk=event)
 
     def downvote(self, event):
         upvote = UpvotePoints(user_pk=self, event_pk=event, points=-1)
