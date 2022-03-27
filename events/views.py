@@ -78,7 +78,6 @@ def canUpvote(request):
     brukertest = Turgåere.objects.filter(username=request.user).get()
     allevotes = brukertest.canVote(event)
     up = allevotes.filter(points=1)
-    down = allevotes.filter(points=-1)
 
     if len(up) != 0:
         return True
@@ -89,7 +88,6 @@ def canDownvote(request):
     event = Event.objects.get(pk=id)
     brukertest = Turgåere.objects.filter(username=request.user).get()
     allevotes = brukertest.canVote(event)
-    up = allevotes.filter(points=1)
     down = allevotes.filter(points=-1)
 
     if len(down) != 0:
@@ -99,12 +97,10 @@ def canDownvote(request):
 def upvote(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
-    bruker = request.user
     brukertest = Turgåere.objects.filter(username=request.user).get()
 
     allevotes = brukertest.canVote(event)
     up = allevotes.filter(points=1)
-    neutral = allevotes.filter(points=0)
     down = allevotes.filter(points=-1)
 
     if len(up) == 0 and len(down) == 0:
@@ -121,18 +117,23 @@ def upvote(request):
         event.save()
         down.delete()
 
+    if len(up) != 0:
+        #Allered upvota, fjerner upvoten 
+        brukertest.upvote(event)
+        event.points -= 1
+        event.save()
+        up.delete()
+
     return redirect("trips")
 
 
 def downvote(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
-    bruker = request.user
     brukertest = Turgåere.objects.filter(username=request.user).get()
 
     allevotes = brukertest.canVote(event)
     up = allevotes.filter(points=1)
-    neutral = allevotes.filter(points=0)
     down = allevotes.filter(points=-1)
 
     if len(up) == 0 and len(down) == 0:
@@ -148,4 +149,11 @@ def downvote(request):
         event.points -= 2
         event.save()
         up.delete()
+    
+    if len(down) != 0:
+        #Allered downvota, fjerner downvoten
+        brukertest.downvote(event)
+        event.points += 1
+        event.save()
+        down.delete()
     return redirect("trips")
