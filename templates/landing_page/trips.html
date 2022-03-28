@@ -11,18 +11,14 @@
     <div class="card-body">
       <h4 class="card-title">{{tittel.tittel}}</h4>
 {% if request.user.is_authenticated %}
-        <p>{{ tittel.points }}</p>
-        
+
         <p class="card-text"style="font-size:14px"> Arrangør: {{tittel.arrangør}}</p>
         <p class="card-text"style="font-size:14px"> Dato: {{tittel.dato}}</p>
+        <p class="card-text"style="font-size:14px">Poeng: {{ tittel.points }}</p>
         
         <p class="card-text"><I>{{tittel.beskrivelse}}</I></p>
         <a href="../event_page?id={{tittel.pk}}" class="btn btn-success">Se detaljer</a>
-        {% if request.user.canUpvote %}
         <a type="button" class="btn btn-light" href = "upvote/?id={{ tittel.pk }}">ʌ</a>
-        {% else %}
-        <a type="button" class="btn btn-dark" href = "upvote/?id={{ tittel.pk }}">ʌ</a>
-        {% endif %}
         <a type="button" class="btn btn-light" href = "downvote/?id={{ tittel.pk }}">v</a>
 {% endif %}
       </div>
