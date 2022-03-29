@@ -1,7 +1,13 @@
 import datetime
+import imp
 from django.shortcuts import redirect, render
 from django.db.models import F, Count
+
+from brukere.models import UpvotePoints
+
 from .models import Event
+from brukere.models import Turgåere
+
 
 
 # Create your views here.
@@ -19,7 +25,9 @@ def tripstest(request):
                'bilde': event,
                'user': user.is_authenticated,
                'name': user.username,
-               'view': True}
+               'view': True,
+               'points': event,
+               }
     return render(request, 'landing_page/trips.html', context)
 
 
@@ -33,6 +41,7 @@ def deleteEvent(request):
 def editEvent(request):
     id = request.GET.get('id', '0')
     event = Event.objects.get(pk=id)
+
     dato1 = str(event.dato)
     dato = dato1.split(' ')  # ['2111-12-12', '20:22:00+00:00']
     dato2 = dato[1].split(':')
@@ -46,7 +55,8 @@ def editEvent(request):
                'dato': dato,
                'beskrivelse': event.beskrivelse,
                'pk': event.pk,
-               'bilde': event.bilde, }
+               'bilde': event.bilde,
+               'points': event.points }
     return render(request, 'edit_event/edit_event_form.html', context)
 
 
@@ -99,3 +109,97 @@ def search_results(request):
     'name': user.username,
     'view': True}
     return render(request, 'landing_page/trips.html', context)
+
+def totalPoints(request, pk):
+    votes = UpvotePoints.objects.all()
+    votes = votes.filter(event_pk=pk)
+    up = votes.filter(points=1)
+    down = votes.filter(points=-1)
+    return int(len(up) - len(down))
+
+
+def canUpvote(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    brukertest = Turgåere.objects.filter(username=request.user).get()
+    allevotes = brukertest.canVote(event)
+    up = allevotes.filter(points=1)
+
+    if len(up) != 0:
+        return True
+
+
+def canDownvote(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    brukertest = Turgåere.objects.filter(username=request.user).get()
+    allevotes = brukertest.canVote(event)
+    down = allevotes.filter(points=-1)
+
+    if len(down) != 0:
+        return True
+
+
+def upvote(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    brukertest = Turgåere.objects.filter(username=request.user).get()
+
+    allevotes = brukertest.canVote(event)
+    up = allevotes.filter(points=1)
+    down = allevotes.filter(points=-1)
+
+    if len(up) == 0 and len(down) == 0:
+        # Ingen upvotes eller downvotes
+        brukertest.upvote(event)
+        event.points += 1
+        event.save()
+
+    if len(down) != 0:
+        # Allerede downvota, upvoter og sletter gamle downvote
+        brukertest.upvote(event)
+        # Må opp 2 siden vi er minus 1
+        event.points += 2
+        event.save()
+        down.delete()
+
+    if len(up) != 0:
+        #Allered upvota, fjerner upvoten 
+        brukertest.upvote(event)
+        event.points -= 1
+        event.save()
+        up.delete()
+
+    return redirect("trips")
+
+
+def downvote(request):
+    id = request.GET.get('id', '0')
+    event = Event.objects.get(pk=id)
+    brukertest = Turgåere.objects.filter(username=request.user).get()
+
+    allevotes = brukertest.canVote(event)
+    up = allevotes.filter(points=1)
+    down = allevotes.filter(points=-1)
+
+    if len(up) == 0 and len(down) == 0:
+        # Ingen upvotes eller downvotes
+        brukertest.downvote(event)
+        event.points -= 1
+        event.save()
+
+    if len(up) != 0:
+        # Allerede downvota, upvoter og sletter gamle downvote
+        brukertest.downvote(event)
+        # Må opp 2 siden vi er minus 1
+        event.points -= 2
+        event.save()
+        up.delete()
+    
+    if len(down) != 0:
+        #Allered downvota, fjerner downvoten
+        brukertest.downvote(event)
+        event.points += 1
+        event.save()
+        down.delete()
+    return redirect("trips")
