@@ -50,7 +50,6 @@ class Event(models.Model):
     terreng = models.CharField(max_length=40, default='', null=True)
     lengde = models.IntegerField(null=True, default=None)
     utstyr = models.CharField(max_length=40, default='', null=True)
-    points = models.IntegerField(blank=False, default=0)
     bilde = models.ImageField(upload_to='static/uploads/', blank=True)
     synlig = models.BooleanField(default=True)
     seriøsaktør = models.BooleanField(default=False)
@@ -73,7 +72,7 @@ class Event(models.Model):
         return self.dato < timezone.now()
 
     def __str__(self):
-        return '{}, Dato: {}, Antall poeng {}'.format(self.tittel, self.dato, self.points)
+        return '{}, Dato: {}'.format(self.tittel, self.dato)
 
     def labels_vankselighetsgrad(self):
         return [label for value, label in self.fields['vanskelighetsgrad'].choices if value in self['vanskelighetsgrad'].value()]
