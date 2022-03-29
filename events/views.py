@@ -1,12 +1,10 @@
 import datetime
 import imp
 from django.shortcuts import redirect, render
-<<<<<<< HEAD
 from django.db.models import F, Count
-=======
 
 from brukere.models import UpvotePoints
->>>>>>> 30-14-som-bruker-onsker-jeg-a-vurdere-rangere-turer-slik-at-man-kan-gi-tilbakemelding-pa-turen
+
 from .models import Event
 from brukere.models import Turgåere
 
